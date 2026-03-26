@@ -1,43 +1,44 @@
-# Astro Starter Kit: Minimal
+# Shellfolio
 
-```sh
-npm create astro@latest -- --template minimal
+A high-performance, terminal-styled portfolio website built with **Astro**, **TypeScript**, and **Tailwind CSS**. Designed for developers who live in the command line.
+
+### Lighthouse Scores
+| Performance | Accessibility | Best Practices | SEO |
+| :---: | :---: | :---: | :---: |
+| 🟢 100 | 🟢 100 | 🟢 100 | 🟢 100 |
+
+* **Ultra Fast:** Built with Astro for zero-runtime JavaScript by default.
+* **SEO Optimized:** Fully compliant with search engine standards and meta tags.
+* **Type-Safe:** Entirely written in TypeScript with a strict configuration layer.
+* **Lightweight:** Minimal bundle size ensuring instant load times on any device.
+* **Terminal UI:** Authentic shell experience with a focus on readability and accessibility.
+* **CI/CD Ready:** Optimized for seamless deployment with local build support.
+
+---
+
+## Quick Start
+
+Follow these steps to get your terminal portfolio running locally.
+
+1. Clone the repository from github.com/barisatay0/shellfolio and navigate into the folder.
+```bash
+   git clone [https://github.com/barisatay0/shellfolio.git](https://github.com/barisatay0/shellfolio.git)
+   cd shellfolio
+```
+2. Install the necessary packages by running npm install or bun install.
+```bash
+npm install
+# or
+bun install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+3. Create your personal configuration file by copying the template. Run the command:
+```bash
+cp src/data/config.example.ts src/data/config.ts
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+4. Open src/data/config.ts in your editor and update the fields with your personal name, role, social links, and project details.
+5. Start the development server using npm run dev.
+```bash
+npm run dev
+```
+The application will be live at http://localhost:4321.
