@@ -1,0 +1,67 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
+import { CONFIG } from "../data/config";
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title, description = CONFIG.developer.bio } = Astro.props;
+---
+
+<!doctype html>
+<html
+    lang="en"
+    class="bg-black text-slate-300 font-mono antialiased selection:bg-green-900 selection:text-white"
+>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description} />
+        <title>{title} | {CONFIG.developer.alias}</title>
+        <ClientRouter />
+    </head>
+    <body
+        class="h-screen w-screen flex flex-col md:flex-row overflow-hidden bg-black"
+    >
+        <Navbar />
+
+        <main class="flex-1 h-full flex flex-col relative bg-[#050505]">
+            <header
+                class="h-12 border-b border-slate-800 bg-black flex items-center px-6 text-xs text-white justify-between shrink-0 z-10"
+            >
+                <div class="flex gap-4">
+                    <span class="hidden sm:inline font-bold text-slate-100"
+                        >USER: root</span
+                    >
+                    <span class="text-slate-100"
+                        >SYS: {CONFIG.developer.system}</span
+                    >
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>STATUS:</span>
+                    <strong
+                        class="text-[#4ade80] animate-pulse font-bold tracking-wider"
+                        >ONLINE</strong
+                    >
+                </div>
+            </header>
+
+            <div
+                class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] bg-size-[40px_40px] z-0"
+            >
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-4 md:p-8 relative z-10">
+                <div
+                    class="max-w-5xl mx-auto h-full animate-in fade-in slide-in-from-bottom-4 duration-500"
+                >
+                    <slot />
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
