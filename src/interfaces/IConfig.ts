@@ -5,6 +5,7 @@ export interface IConfig {
     role: string;
     system: string;
     bio: string;
+    avatar?: string;
   };
   socials: Record<string, string>;
   skills: { category: string; items: string[] }[];
@@ -13,6 +14,9 @@ export interface IConfig {
     name: string;
     description: string;
     url?: string;
+    github?: string;
+    logo?: string;
+    images?: string[];
     stack: string[];
     status: "PROD" | "BETA" | "DEPRECATED";
     latency: string;

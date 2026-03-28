@@ -1,7 +1,10 @@
 ---
 import { CONFIG } from "../../data/config";
+import { getLangFromUrl, useTranslations } from "../../translation/utils";
 
 const configJson = JSON.stringify(CONFIG);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <sys-terminal
@@ -35,15 +38,14 @@ const configJson = JSON.stringify(CONFIG);
         id="terminal-scroll"
     >
         <div id="terminal-output" class="space-y-1 mb-2">
-            <p class="text-green-500 font-bold">AmogOS v1.5.0 (tty1)</p>
+            <p class="text-green-500 font-bold">{t('terminal.welcome')}</p>
             <p class="text-slate-300 mb-4">
-                Type <span class="text-green-300">'help'</span> for a list of available
-                commands.
+                {t('terminal.hint').replace("'help'", "").split("").join("")} <span class="text-green-300">'help'</span> {t('terminal.hint').split("'help'")[1]}
             </p>
         </div>
 
         <form id="terminal-form" class="flex items-center">
-            <label for="terminal-input" class="sr-only">Terminal Command</label>
+            <label for="terminal-input" class="sr-only">{t('terminal.sr_only')}</label>
             <span class="text-green-500 mr-2 font-bold" aria-hidden="true"
                 >➜</span
             >

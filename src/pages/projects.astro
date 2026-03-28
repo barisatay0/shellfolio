@@ -1,10 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Database, Search, Github } from "lucide-astro";
+import { Database, Search, Github, ExternalLink } from "lucide-astro";
 import { CONFIG } from "../data/config";
+import { getLangFromUrl, useTranslations } from "../translation/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const getStatusStyle = (status: string) => {
+    if (status === "PROD")
+        return "bg-green-500/10 text-green-300 border-green-500/20";
+    if (status === "BETA")
+        return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
+    return "bg-red-500/10 text-red-400 border-red-500/20";
+};
 ---
 
-<Layout title="Projects DB">
+<Layout title={t('page.projects.title')}>
     <div class="space-y-6">
         <header
             class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
@@ -14,80 +26,130 @@ import { CONFIG } from "../data/config";
                     class="text-xl text-white font-bold flex items-center gap-2"
                 >
                     <Database class="text-blue-500" size={24} />
-                    SELECT * FROM public.projects;
+                    {t('page.projects.query')}
                 </h1>
                 <p class="text-xs text-slate-300 mt-1">
-                    Connected to primary database instance.
+                    {t('page.projects.subtitle')}
                 </p>
             </div>
             <div
-                class="text-xs font-mono bg-[#0a0a0a] py-1.5 px-3 rounded border border-slate-800 text-green-300 flex items-center gap-2"
+                class="text-xs font-mono bg-[#0a0a0a] py-1.5 px-3 rounded border border-slate-800 text-green-300 flex items-center gap-2 self-start sm:self-auto"
             >
                 <Search size={14} class="text-slate-300" />
-                Query returned {CONFIG.projects.length} rows
+                {t('page.projects.rows', CONFIG.projects.length)}
             </div>
         </header>
 
         <div
-            class="bg-[#0a0a0a] border border-slate-800/80 rounded-lg overflow-x-auto shadow-2xl"
+            class="bg-[#0a0a0a] border border-slate-800/80 rounded-lg shadow-2xl overflow-hidden"
         >
-            <table class="w-full text-left text-sm font-mono min-w-175">
+            <table class="w-full text-left text-sm font-mono block lg:table">
                 <thead
-                    class="bg-slate-900/50 text-slate-300 border-b border-slate-800/80"
+                    class="hidden lg:table-header-group bg-slate-900/50 text-slate-300 border-b border-slate-800/80"
                 >
                     <tr>
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >id</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >project_details</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >tech_stack</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >latency</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >status</th
-                        >
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t('table.id')}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t('table.details')}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t('table.stack')}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t('table.latency')}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t('table.status')}</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-800/50 text-slate-300">
+                <tbody
+                    class="block lg:table-row-group divide-y divide-slate-800/50 text-slate-300"
+                >
                     {
                         CONFIG.projects.map((proj) => (
-                            <tr class="hover:bg-slate-800/30 transition-colors group">
-                                <td class="p-4 text-slate-300 align-top pt-5">
-                                    {proj.id}
-                                </td>
-                                <td class="p-4 align-top">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="font-bold text-blue-400 group-hover:text-blue-300 transition-colors">
-                                            {proj.name}
+                            <tr class="block lg:table-row hover:bg-slate-800/30 transition-colors group p-5 lg:p-0">
+                                <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-3 lg:mb-0">
+                                    <div class="flex items-center justify-between lg:block">
+                                        <span class="text-green-500 lg:text-slate-300 font-bold lg:font-normal text-xs lg:text-sm">
+                                            {proj.id}
                                         </span>
-                                        {proj.url && (
-                                            <a
-                                                href={proj.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label={`${proj.name} GitHub repository`}
-                                                class="text-slate-300 hover:text-white transition-colors"
-                                                aria-label={`View ${proj.name} source code on GitHub`}
+                                        <div class="lg:hidden">
+                                            <span
+                                                class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide ${getStatusStyle(proj.status)}`}
                                             >
-                                                <Github size={14} />
-                                            </a>
-                                        )}
+                                                {proj.status}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <p class="text-xs text-slate-300 max-w-sm leading-relaxed">
-                                        {proj.description}
-                                    </p>
                                 </td>
-                                <td class="p-4 align-top pt-5">
+
+                                <td class="block lg:table-cell lg:p-4 align-top mb-4 lg:mb-0">
+                                    <div class="flex items-start gap-3 lg:gap-4">
+                                        {proj.logo && (
+                                            <img
+                                                src={proj.logo}
+                                                alt={`${proj.name} logo`}
+                                                class="w-10 h-10 sm:w-12 sm:h-12 rounded bg-slate-900 border border-slate-700 object-contain p-1 shrink-0 mt-1"
+                                            />
+                                        )}
+
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <span class="font-bold text-blue-400 group-hover:text-blue-300 transition-colors text-base lg:text-sm">
+                                                    {proj.name}
+                                                </span>
+
+                                                {proj.github && (
+                                                    <a
+                                                        href={proj.github}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="text-slate-300 hover:text-white transition-colors"
+                                                        aria-label={`View ${proj.name} source code`}
+                                                    >
+                                                        <Github size={16} class="lg:w-4 lg:h-4" />
+                                                    </a>
+                                                )}
+
+                                                {proj.url && (
+                                                    <a
+                                                        href={proj.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="text-slate-300 hover:text-blue-400 transition-colors"
+                                                        aria-label={`View ${proj.name} live preview`}
+                                                    >
+                                                        <ExternalLink size={16} class="lg:w-4 lg:h-4" />
+                                                    </a>
+                                                )}
+                                            </div>
+
+                                            <p class="text-xs text-slate-400 lg:text-slate-300 max-w-sm leading-relaxed mb-2">
+                                                {proj.description}
+                                            </p>
+
+                                            {proj.images &&
+                                                proj.images.length > 0 && (
+                                                    <div class="flex flex-wrap gap-2 mt-2">
+                                                        {proj.images.map(
+                                                            (imgUrl) => (
+                                                                <a
+                                                                    href={imgUrl}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    class="block"
+                                                                >
+                                                                    <img
+                                                                        src={imgUrl}
+                                                                        alt={`${proj.name} screenshot`}
+                                                                        class="h-10 w-16 object-cover rounded border border-slate-700/80 hover:border-green-400/50 opacity-80 hover:opacity-100 transition-all cursor-zoom-in"
+                                                                    />
+                                                                </a>
+                                                            ),
+                                                        )}
+                                                    </div>
+                                                )}
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-3 lg:mb-0">
+                                    <div class="text-[10px] text-slate-500 uppercase tracking-widest mb-2 lg:hidden">
+                                        {t('mobile.techStack')}
+                                    </div>
                                     <div class="flex gap-2 flex-wrap">
                                         {proj.stack.map((tech) => (
                                             <span class="text-[10px] bg-slate-900 px-2 py-0.5 rounded border border-slate-700 text-slate-300">
@@ -96,18 +158,21 @@ import { CONFIG } from "../data/config";
                                         ))}
                                     </div>
                                 </td>
-                                <td class="p-4 text-slate-300 align-top pt-5">
-                                    {proj.latency}
+
+                                <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-2 lg:mb-0">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-[10px] text-slate-500 uppercase tracking-widest lg:hidden">
+                                            {t('mobile.latency')}
+                                        </span>
+                                        <span class="text-slate-300 text-xs lg:text-sm">
+                                            {proj.latency}
+                                        </span>
+                                    </div>
                                 </td>
-                                <td class="p-4 align-top pt-5">
+
+                                <td class="hidden lg:table-cell p-4 align-top pt-5">
                                     <span
-                                        class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide ${
-                                            proj.status === "PROD"
-                                                ? "bg-green-500/10 text-green-300 border-green-500/20"
-                                                : proj.status === "BETA"
-                                                  ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20"
-                                                  : "bg-red-500/10 text-red-400 border-red-500/20"
-                                        }`}
+                                        class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide ${getStatusStyle(proj.status)}`}
                                     >
                                         {proj.status}
                                     </span>
