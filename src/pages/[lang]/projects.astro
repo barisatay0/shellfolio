@@ -3,12 +3,14 @@ import Layout from "../../layouts/Layout.astro";
 import { Database, Search, Github, ExternalLink } from "lucide-astro";
 import { projects } from "../../content/projects";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { Image } from "astro:assets";
 
 export function getStaticPaths() {
     return [{ params: { lang: "en" } }, { params: { lang: "tr" } }];
 }
 
 const lang = getLangFromUrl(Astro.url);
+const currentLang = lang as "en" | "tr";
 const t = useTranslations(lang);
 
 const getStatusStyle = (status: string) => {
@@ -98,9 +100,11 @@ const getStatusStyle = (status: string) => {
                                 <td class="block lg:table-cell lg:p-4 align-top mb-4 lg:mb-0">
                                     <div class="flex items-start gap-3 lg:gap-4">
                                         {proj.logo && (
-                                            <img
+                                            <Image
                                                 src={proj.logo}
                                                 alt={`${proj.name} logo`}
+                                                width={48}
+                                                height={48}
                                                 class="w-10 h-10 sm:w-12 sm:h-12 rounded bg-slate-900 border border-slate-700 object-contain p-1 shrink-0 mt-1"
                                             />
                                         )}
@@ -137,7 +141,7 @@ const getStatusStyle = (status: string) => {
                                                 )}
                                             </div>
                                             <p class="text-xs text-slate-400 lg:text-slate-300 max-w-sm leading-relaxed mb-2">
-                                                {proj.description}
+                                                {proj.description[currentLang] || proj.description.en}
                                             </p>
                                         </div>
                                     </div>

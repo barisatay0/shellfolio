@@ -16,8 +16,10 @@ export const projects: Project[] = [
   {
     id: "PRJ-01",
     name: "quantum-auth-service",
-    description:
-      "Distributed authentication microservice handling 50k req/sec.",
+    description: {
+      en: "Distributed authentication microservice handling 50k req/sec.",
+      tr: "Saniyede 50 bin istek işleyen dağıtık kimlik doğrulama mikroservisi.",
+    },
     url: "https://github.com/alexcodes/quantum-auth",
     github: "https://github.com/alexcodes/quantum-auth",
     logo: "https://cdn-icons-png.flaticon.com/512/2885/2885412.png",
@@ -31,7 +33,10 @@ export const projects: Project[] = [
   {
     id: "PRJ-02",
     name: "nexus-event-bus",
-    description: "Real-time analytics and event streaming engine.",
+    description: {
+      en: "Real-time analytics and event streaming engine.",
+      tr: "Gerçek zamanlı analitik ve olay akışı motoru.",
+    },
     url: "https://github.com/alexcodes/nexus-bus",
     stack: ["Go", "Kafka"],
     status: "BETA",
@@ -40,8 +45,10 @@ export const projects: Project[] = [
   {
     id: "PRJ-03",
     name: "legacy-monolith",
-    description:
-      "Old monolithic core system. Currently being migrated to microservices.",
+    description: {
+      en: "Old monolithic core system. Currently being migrated to microservices.",
+      tr: "Eski monolitik çekirdek sistem. Şu anda mikroservislere taşınıyor.",
+    },
     stack: ["Node.js", "Express"],
     status: "DEPRECATED",
     latency: "250ms",

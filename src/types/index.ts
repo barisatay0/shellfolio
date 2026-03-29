@@ -1,10 +1,16 @@
+export interface LocalizedString {
+  en: string;
+  tr: string;
+  [key: string]: string;
+}
+
 export interface SiteConfig {
   developer: {
     name: string;
     alias: string;
-    role: string;
+    role: LocalizedString;
     system: string;
-    bio: string;
+    bio: LocalizedString;
     avatar?: string;
   };
   socials: Record<string, string>;
@@ -18,7 +24,7 @@ export interface SkillGroup {
 export interface Project {
   id: string;
   name: string;
-  description: string;
+  description: LocalizedString;
   url?: string;
   github?: string;
   logo?: string;

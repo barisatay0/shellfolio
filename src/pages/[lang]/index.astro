@@ -4,12 +4,14 @@ import { siteConfig } from "../../config/site";
 import { skills } from "../../content/projects";
 import { Terminal } from "lucide-astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { Image } from 'astro:assets';
 
 export function getStaticPaths() {
     return [{ params: { lang: "en" } }, { params: { lang: "tr" } }];
 }
 
 const lang = getLangFromUrl(Astro.url);
+const currentLang = lang as "en" | "tr";
 const t = useTranslations(lang);
 ---
 
@@ -22,11 +24,13 @@ const t = useTranslations(lang);
                 siteConfig.developer.avatar && (
                     <div class="relative shrink-0 group">
                         <div class="absolute inset-0 bg-green-500/20 blur-xl rounded-full group-hover:bg-green-500/30 transition-all duration-300" />
-                        <img
-                            src={siteConfig.developer.avatar}
-                            alt="Developer Avatar"
-                            class="relative w-28 h-28 sm:w-24 sm:h-24 rounded-xl border border-slate-700 sm:border-green-500/50 object-cover shadow-[0_0_15px_rgba(34,197,94,0.1)] grayscale hover:grayscale-0 transition-all duration-300 z-10"
-                        />
+                             <Image 
+                                 src={siteConfig.developer.avatar} 
+                                 alt="Developer Avatar" 
+                                 width={96} 
+                                 height={96}
+                                 class="relative w-28 h-28 sm:w-24 sm:h-24 rounded-xl border border-slate-700 sm:border-green-500/50 object-cover shadow-[0_0_15px_rgba(34,197,94,0.1)] grayscale hover:grayscale-0 transition-all duration-300 z-10"
+                             />
                         <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-slate-900 rounded-full animate-pulse z-20 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
                     </div>
                 )
@@ -44,7 +48,7 @@ const t = useTranslations(lang);
                 <p
                     class="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed mb-6"
                 >
-                    {siteConfig.developer.bio}
+                    {siteConfig.developer.bio[currentLang] || siteConfig.developer.bio.en}
                 </p>
 
                 <div

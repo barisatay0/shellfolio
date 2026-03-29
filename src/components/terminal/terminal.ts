@@ -1,10 +1,18 @@
-import type { SiteConfig, Project } from "../../types";
-
-interface TerminalData extends SiteConfig {
-  projects: Project[];
+interface FlatTerminalData {
+  developer: {
+    name: string;
+    alias: string;
+    role: string;
+    system: string;
+    bio: string;
+  };
+  socials: Record<string, string>;
+  projects: any[];
 }
+
 export class Terminal extends HTMLElement {
-  config: TerminalData;
+  config: FlatTerminalData;
+  i18n: any;
   commandHistory: string[];
   historyIndex: number;
 
@@ -18,6 +26,7 @@ export class Terminal extends HTMLElement {
     const scrollArea = this.querySelector("#terminal-scroll") as HTMLElement;
 
     this.config = JSON.parse(this.dataset.config || "{}");
+    this.i18n = JSON.parse(this.dataset.i18n || "{}");
     this.commandHistory = [];
     this.historyIndex = -1;
 
@@ -100,20 +109,20 @@ export class Terminal extends HTMLElement {
     const cmd = rawCmd.toLowerCase().trim();
 
     if (cmd.startsWith("select ") && cmd.includes("from public.projects")) {
-      this.printLine("Executing query on primary database node...", "warning");
+      this.printLine(this.i18n.querying, "warning");
 
       setTimeout(() => {
         const pad = (str: string, len: number) =>
           (str || "").toString().padEnd(len, " ");
 
-        let table = `ID     | PROJECT NAME         | STATUS | LATENCY`;
-        table += ` -------+----------------------+--------+--------`;
+        let table = `${this.i18n.colId.toUpperCase().padEnd(6, " ")} | ${this.i18n.colName.toUpperCase().padEnd(20, " ")} | ${this.i18n.colStatus.toUpperCase().padEnd(6, " ")} | ${this.i18n.colLatency.toUpperCase()}`;
+        table += `\n-------+----------------------+--------+--------`;
 
         this.config.projects.forEach((p: any) => {
-          table += ` ${pad(p.id, 6)} | ${pad(p.name, 20)} | ${pad(p.status, 6)} | ${p.latency} `;
+          table += `\n ${pad(p.id, 6)} | ${pad(p.name, 20)} | ${pad(p.status, 6)} | ${p.latency} `;
         });
 
-        table += ` (${this.config.projects.length} rows affected)`;
+        table += `\n ${this.i18n.rowsAffected.replace("{count}", this.config.projects.length.toString())}`;
         this.printLine(table, "system");
       }, 400);
       return;
@@ -123,20 +132,7 @@ export class Terminal extends HTMLElement {
 
     switch (baseCmd) {
       case "help":
-        this.printLine(`
-Available commands:
-  whoami      - Display current user profile
-  neofetch    - Display system information
-  ls          - List directory contents
-  cat         - Concatenate and print files
-  ping        - Send ICMP ECHO_REQUEST to network hosts
-  coffee      - Initiate brewing sequence
-  clear       - Clear terminal output
-  sudo        - Execute a command as superuser
-
-Supported SQL:
-  SELECT * FROM public.projects;
-          `);
+        this.printLine(this.i18n.help);
         break;
 
       case "whoami":
@@ -169,39 +165,27 @@ Supported SQL:
       case "cat":
         const file = args[0];
         if (!file) {
-          this.printLine("cat: missing file operand", "error");
+          this.printLine(this.i18n.catMissing, "error");
         } else if (file === "secrets.txt" || file === ".env") {
-          this.printLine(
-            `cat: ${file}: Permission denied. Nice try, FBI.`,
-            "error",
-          );
+          this.printLine(this.i18n.catDenied.replace("{file}", file), "error");
         } else if (file === "resume.md") {
           this.printLine(
             `# ${this.config.developer.name} ${this.config.developer.role}  Reach me at: ${this.config.socials.email}`,
           );
         } else if (file === "projects.db") {
-          this.printLine(
-            "Error: Binary file projects.db matches. Use SQL to query.",
-            "warning",
-          );
+          this.printLine(this.i18n.catBinary, "warning");
         } else {
-          this.printLine(`cat: ${file}: No such file or directory`, "error");
+          this.printLine(this.i18n.catNoFile.replace("{file}", file), "error");
         }
         break;
 
       case "ping":
         const target = args[0] || "127.0.0.1";
-        this.printLine(
-          `PING ${target} (56 data bytes) 64 bytes from ${target}: icmp_seq=1 ttl=64 time=0.042 ms\n64 bytes from ${target}: icmp_seq=2 ttl=64 time=0.039 ms\n... ping terminated.`,
-          "system",
-        );
+        this.printLine(this.i18n.ping.replace(/\{target\}/g, target), "system");
         break;
 
       case "coffee":
-        this.printLine(
-          "HTTP Error 418: I'm a teapot. Refusing to brew coffee.",
-          "error",
-        );
+        this.printLine(this.i18n.coffee, "error");
         break;
 
       case "clear":
@@ -210,23 +194,14 @@ Supported SQL:
         break;
 
       case "sudo":
-        const excuses = [
-          "Nice try. This incident will be reported.",
-          "User 'guest' is not in the sudoers file.",
-          "Are you crazy? I'm not running that as root!",
-          "Access Denied. Initiating self-destruct sequence... Just kidding.",
-          "Error: Permission denied (publickey,password,keyboard-interactive).",
-        ];
+        const excuses = this.i18n.sudo;
         const randomExcuse =
           excuses[Math.floor(Math.random() * excuses.length)];
         this.printLine(randomExcuse, "error");
         break;
 
       default:
-        this.printLine(
-          `bash: ${baseCmd}: command not found. Type 'help' to see valid commands.`,
-          "error",
-        );
+        this.printLine(this.i18n.notFound.replace("{cmd}", baseCmd), "error");
     }
   }
 }
