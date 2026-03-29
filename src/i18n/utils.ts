@@ -1,27 +1,9 @@
-import { ui, defaultLang } from "./lang";
+import { ui, defaultLang } from "./ui";
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
   if (lang in ui) return lang as keyof typeof ui;
   return defaultLang;
-}
-
-export function getRouteWithLang(url: URL, targetLang: string) {
-  const [, currentLang, ...rest] = url.pathname.split("/");
-
-  if (currentLang in ui) {
-    if (targetLang === defaultLang) {
-      return "/" + rest.join("/");
-    }
-    return `/${targetLang}/${rest.join("/")}`;
-  }
-
-  if (targetLang === defaultLang) {
-    return url.pathname;
-  }
-
-  const path = url.pathname === "/" ? "" : url.pathname;
-  return `/${targetLang}${path}`;
 }
 
 export function useTranslations(lang: keyof typeof ui) {
@@ -30,11 +12,18 @@ export function useTranslations(lang: keyof typeof ui) {
     dynamicValue?: string | number,
   ): string {
     let translation: string = ui[lang][key] || ui[defaultLang][key];
-
     if (dynamicValue !== undefined) {
       translation = translation.replace(/\{[^}]+\}/, String(dynamicValue));
     }
-
     return translation;
   };
+}
+
+export function getRouteWithLang(url: URL, targetLang: string) {
+  const [, currentLang, ...rest] = url.pathname.split("/");
+  if (currentLang in ui) {
+    return `/${targetLang}/${rest.join("/")}`.replace(/\/$/, "");
+  }
+  const path = url.pathname === "/" ? "" : url.pathname;
+  return `/${targetLang}${path}`;
 }

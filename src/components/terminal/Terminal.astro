@@ -1,8 +1,11 @@
 ---
-import { CONFIG } from "../../data/config";
-import { getLangFromUrl, useTranslations } from "../../translation/utils";
+import { siteConfig } from "../../config/site";
+import { projects } from "../../content/projects";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
-const configJson = JSON.stringify(CONFIG);
+const terminalData = { ...siteConfig, projects };
+const configJson = JSON.stringify(terminalData);
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -29,7 +32,7 @@ const t = useTranslations(lang);
             </div>
         </div>
         <span class="ml-2 text-[10px] text-slate-300 tracking-widest uppercase"
-            >root@{CONFIG.developer.alias} ~ /bin/bash</span
+            >root@{siteConfig.developer.alias} ~ /bin/bash</span
         >
     </header>
 
@@ -38,14 +41,18 @@ const t = useTranslations(lang);
         id="terminal-scroll"
     >
         <div id="terminal-output" class="space-y-1 mb-2">
-            <p class="text-green-500 font-bold">{t('terminal.welcome')}</p>
+            <p class="text-green-500 font-bold">{t("terminal.welcome")}</p>
             <p class="text-slate-300 mb-4">
-                {t('terminal.hint').replace("'help'", "").split("").join("")} <span class="text-green-300">'help'</span> {t('terminal.hint').split("'help'")[1]}
+                {t("terminal.hint").replace("'help'", "").split("").join("")}
+                <span class="text-green-300">'help'</span>
+                {t("terminal.hint").split("'help'")[1]}
             </p>
         </div>
 
         <form id="terminal-form" class="flex items-center">
-            <label for="terminal-input" class="sr-only">{t('terminal.sr_only')}</label>
+            <label for="terminal-input" class="sr-only"
+                >{t("terminal.sr_only")}</label
+            >
             <span class="text-green-500 mr-2 font-bold" aria-hidden="true"
                 >➜</span
             >

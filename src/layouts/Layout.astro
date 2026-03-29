@@ -2,18 +2,17 @@
 import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import Analytics from "@vercel/analytics/astro";
-import Navbar from "../components/Navbar.astro";
-import { CONFIG } from "../data/config";
+import Navbar from "../components/common/Navbar.astro";
+import { siteConfig } from "../config/site";
 import "../styles/global.css";
-import { getLangFromUrl, useTranslations } from "../translation/utils";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 interface Props {
     title: string;
     description?: string;
 }
 
-const { title, description = CONFIG.developer.bio } = Astro.props;
-
+const { title, description = siteConfig.developer.bio } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -27,7 +26,7 @@ const t = useTranslations(lang);
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={description} />
-        <title>{title} | {CONFIG.developer.alias}</title>
+        <title>{title} | {siteConfig.developer.alias}</title>
         <ClientRouter />
     </head>
     <body
@@ -43,17 +42,17 @@ const t = useTranslations(lang);
             >
                 <div class="flex gap-4">
                     <span class="hidden sm:inline font-bold text-slate-100"
-                        >{t('layout.user')}</span
+                        >{t("layout.user")}</span
                     >
                     <span class="text-slate-100"
-                        >{t('layout.sys', CONFIG.developer.system)}</span
+                        >{t("layout.sys", siteConfig.developer.system)}</span
                     >
                 </div>
                 <div class="flex items-center gap-2">
-                    <span>{t('layout.status')}</span>
+                    <span>{t("layout.status")}</span>
                     <strong
                         class="text-[#4ade80] animate-pulse font-bold tracking-wider"
-                        >{t('layout.online')}</strong
+                        >{t("layout.online")}</strong
                     >
                 </div>
             </header>

@@ -1,7 +1,10 @@
-import type { IConfig } from "../../interfaces/IConfig";
+import type { SiteConfig, Project } from "../../types";
 
-export class terminal extends HTMLElement {
-  config: IConfig;
+interface TerminalData extends SiteConfig {
+  projects: Project[];
+}
+export class Terminal extends HTMLElement {
+  config: TerminalData;
   commandHistory: string[];
   historyIndex: number;
 
@@ -229,5 +232,5 @@ Supported SQL:
 }
 
 if (!customElements.get("sys-terminal")) {
-  customElements.define("sys-terminal", terminal);
+  customElements.define("sys-terminal", Terminal);
 }
