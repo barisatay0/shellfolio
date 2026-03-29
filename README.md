@@ -36,8 +36,6 @@ Clone the project from GitHub and navigate into the directory:
 git clone [https://github.com/barisatay0/shellfolio.git](https://github.com/barisatay0/shellfolio.git)
 cd shellfolio
 ```
-
-````md
 ## 2. Install Dependencies
 
 Install the necessary packages using your preferred package manager (Bun is recommended for speed):
