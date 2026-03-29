@@ -17,6 +17,7 @@ export const siteConfig: SiteConfig = {
   },
   socials: {
     github: "https://github.com/barisatay0",
+    linkedin: "https://www.linkedin.com/in/barış-atay",
     email: "mailto:barisatay0@hotmail.com",
   },
 };
