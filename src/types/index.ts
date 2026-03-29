@@ -21,6 +21,8 @@ export interface SkillGroup {
   items: string[];
 }
 
+export type ProjectStatus = "ACTIVE" | "WIP" | "MAINTAINED" | "ARCHIVED";
+
 export interface Project {
   id: string;
   name: string;
@@ -30,6 +32,8 @@ export interface Project {
   logo?: string;
   images?: string[];
   stack: string[];
-  status: "PROD" | "BETA" | "DEPRECATED";
-  latency: string;
+  status: ProjectStatus;
+  version: string;
+  year: string;
+  license: string;
 }

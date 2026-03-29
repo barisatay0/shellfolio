@@ -2,22 +2,21 @@ import type { SiteConfig } from "../types";
 
 export const siteConfig: SiteConfig = {
   developer: {
-    name: "Alex Chen",
-    alias: "alexcodes",
+    name: "Barış Atay",
+    alias: "barisatay0",
     role: {
-      en: "Backend & Systems Engineer",
-      tr: "Geliştirici & Sistem Mühendisi",
+      en: "Software Developer",
+      tr: "Yazılım Geliştirici",
     },
-    system: "x86_64 Linux 6.8.0-kernel",
+    system: "x86_64 Arch Linux (Hyprland)",
     bio: {
-      en: "Building distributed systems and high-throughput APIs. Writing code that sleeps so servers don't have to.",
-      tr: "Dağıtık sistemler ve yüksek verimli API'ler geliştiriyorum. Sunucuların uyuyabilmesi için uyuyan kodlar yazıyorum.",
+      en: "Obsessed with performance and architecture. I don't just write code that works — I design and build systems that scale. Focusing on type-safe, high-performance backends using modern runtimes.",
+      tr: "Performans ve mimari tutkunu. Sadece çalışan kodlar yazmıyor, ölçeklenebilir sistemler tasarlıyor ve inşa ediyorum. Modern çalışma zamanlarını kullanarak tip güvenli ve yüksek performanslı sistemlere odaklanıyorum.",
     },
-    avatar: "https://avatars.githubusercontent.com/u/9919?s=200&v=4",
+    avatar: "https://avatars.githubusercontent.com/u/114981821?v=4",
   },
   socials: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    email: "mailto:root@localhost",
+    github: "https://github.com/barisatay0",
+    email: "mailto:barisatay0@hotmail.com",
   },
 };

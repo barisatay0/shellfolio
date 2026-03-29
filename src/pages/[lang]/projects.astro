@@ -14,11 +14,18 @@ const currentLang = lang as "en" | "tr";
 const t = useTranslations(lang);
 
 const getStatusStyle = (status: string) => {
-    if (status === "PROD")
-        return "bg-green-500/10 text-green-300 border-green-500/20";
-    if (status === "BETA")
-        return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
-    return "bg-red-500/10 text-red-400 border-red-500/20";
+    switch (status) {
+        case "ACTIVE":
+            return "bg-green-500/10 text-green-300 border-green-500/20";
+        case "WIP":
+            return "bg-blue-500/10 text-blue-300 border-blue-500/20";
+        case "MAINTAINED":
+            return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
+        case "ARCHIVED":
+            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
+        default:
+            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
+    }
 };
 ---
 
@@ -54,26 +61,11 @@ const getStatusStyle = (status: string) => {
                     class="hidden lg:table-header-group bg-slate-900/50 text-slate-300 border-b border-slate-800/80"
                 >
                     <tr>
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >{t("table.id")}</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >{t("table.details")}</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >{t("table.stack")}</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >{t("table.latency")}</th
-                        >
-                        <th
-                            class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >{t("table.status")}</th
-                        >
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.id")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.details")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.stack")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.version")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.status")}</th>
                     </tr>
                 </thead>
                 <tbody
@@ -95,6 +87,9 @@ const getStatusStyle = (status: string) => {
                                             </span>
                                         </div>
                                     </div>
+                                    <div class="mt-1 hidden lg:block">
+                                        <span class="text-[10px] text-slate-500">{proj.year}</span>
+                                    </div>
                                 </td>
 
                                 <td class="block lg:table-cell lg:p-4 align-top mb-4 lg:mb-0">
@@ -113,17 +108,17 @@ const getStatusStyle = (status: string) => {
                                                 <span class="font-bold text-blue-400 group-hover:text-blue-300 transition-colors text-base lg:text-sm">
                                                     {proj.name}
                                                 </span>
+                                                <span class="text-[10px] bg-slate-800/50 text-slate-400 px-1.5 py-0.5 rounded border border-slate-700/50">
+                                                    {proj.license}
+                                                </span>
                                                 {proj.github && (
                                                     <a
                                                         href={proj.github}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        class="text-slate-300 hover:text-white transition-colors"
+                                                        class="text-slate-300 hover:text-white transition-colors ml-1"
                                                     >
-                                                        <Github
-                                                            size={16}
-                                                            class="lg:w-4 lg:h-4"
-                                                        />
+                                                        <Github size={16} class="lg:w-4 lg:h-4" />
                                                     </a>
                                                 )}
                                                 {proj.url && (
@@ -133,10 +128,7 @@ const getStatusStyle = (status: string) => {
                                                         rel="noopener noreferrer"
                                                         class="text-slate-300 hover:text-blue-400 transition-colors"
                                                     >
-                                                        <ExternalLink
-                                                            size={16}
-                                                            class="lg:w-4 lg:h-4"
-                                                        />
+                                                        <ExternalLink size={16} class="lg:w-4 lg:h-4" />
                                                     </a>
                                                 )}
                                             </div>
@@ -158,14 +150,14 @@ const getStatusStyle = (status: string) => {
                                 </td>
 
                                 <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-2 lg:mb-0">
-                                    <span class="text-slate-300 text-xs lg:text-sm">
-                                        {proj.latency}
+                                    <span class="text-slate-300 text-xs lg:text-sm font-bold font-mono">
+                                        {proj.version}
                                     </span>
                                 </td>
 
                                 <td class="hidden lg:table-cell p-4 align-top pt-5">
                                     <span
-                                        class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide ${getStatusStyle(proj.status)}`}
+                                        class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide font-bold ${getStatusStyle(proj.status)}`}
                                     >
                                         {proj.status}
                                     </span>

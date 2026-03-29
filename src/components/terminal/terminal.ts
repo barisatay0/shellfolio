@@ -115,14 +115,14 @@ export class Terminal extends HTMLElement {
         const pad = (str: string, len: number) =>
           (str || "").toString().padEnd(len, " ");
 
-        let table = `${this.i18n.colId.toUpperCase().padEnd(6, " ")} | ${this.i18n.colName.toUpperCase().padEnd(20, " ")} | ${this.i18n.colStatus.toUpperCase().padEnd(6, " ")} | ${this.i18n.colLatency.toUpperCase()}`;
-        table += `\n-------+----------------------+--------+--------`;
+        let table = `${this.i18n.colId.toUpperCase().padEnd(6, " ")} | ${this.i18n.colName.toUpperCase().padEnd(18, " ")} | ${this.i18n.colVersion.toUpperCase().padEnd(8, " ")} | ${this.i18n.colStatus.toUpperCase().padEnd(10, " ")} | ${this.i18n.colYear.toUpperCase()}`;
+        table += `-------+--------------------+----------+------------+------`;
 
         this.config.projects.forEach((p: any) => {
-          table += `\n ${pad(p.id, 6)} | ${pad(p.name, 20)} | ${pad(p.status, 6)} | ${p.latency} `;
+          table += ` ${pad(p.id, 6)} | ${pad(p.name, 18)} | ${pad(p.version, 8)} | ${pad(p.status, 10)} | ${p.year} `;
         });
 
-        table += `\n ${this.i18n.rowsAffected.replace("{count}", this.config.projects.length.toString())}`;
+        table += ` ${this.i18n.rowsAffected.replace("{count}", this.config.projects.length.toString())}`;
         this.printLine(table, "system");
       }, 400);
       return;
@@ -156,10 +156,7 @@ export class Terminal extends HTMLElement {
         break;
 
       case "ls":
-        this.printLine(
-          "projects.db   resume.md   secrets.txt   .env",
-          "system",
-        );
+        this.printLine("projects.db    secrets.txt   .env", "system");
         break;
 
       case "cat":
@@ -168,10 +165,6 @@ export class Terminal extends HTMLElement {
           this.printLine(this.i18n.catMissing, "error");
         } else if (file === "secrets.txt" || file === ".env") {
           this.printLine(this.i18n.catDenied.replace("{file}", file), "error");
-        } else if (file === "resume.md") {
-          this.printLine(
-            `# ${this.config.developer.name} ${this.config.developer.role}  Reach me at: ${this.config.socials.email}`,
-          );
         } else if (file === "projects.db") {
           this.printLine(this.i18n.catBinary, "warning");
         } else {
