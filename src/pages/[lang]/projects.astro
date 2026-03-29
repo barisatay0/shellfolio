@@ -1,0 +1,172 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Database, Search, Github, ExternalLink } from "lucide-astro";
+import { projects } from "../../content/projects";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { Image } from "astro:assets";
+
+export function getStaticPaths() {
+    return [{ params: { lang: "en" } }, { params: { lang: "tr" } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const currentLang = lang as "en" | "tr";
+const t = useTranslations(lang);
+
+const getStatusStyle = (status: string) => {
+    switch (status) {
+        case "ACTIVE":
+            return "bg-green-500/10 text-green-300 border-green-500/20";
+        case "WIP":
+            return "bg-blue-500/10 text-blue-300 border-blue-500/20";
+        case "MAINTAINED":
+            return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
+        case "ARCHIVED":
+            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
+        default:
+            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
+    }
+};
+---
+
+<Layout title={t("page.projects.title")}>
+    <div class="space-y-6">
+        <header
+            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        >
+            <div>
+                <h1
+                    class="text-xl text-white font-bold flex items-center gap-2"
+                >
+                    <Database class="text-blue-500" size={24} />
+                    {t("page.projects.query")}
+                </h1>
+                <p class="text-xs text-slate-300 mt-1">
+                    {t("page.projects.subtitle")}
+                </p>
+            </div>
+            <div
+                class="text-xs font-mono bg-[#0a0a0a] py-1.5 px-3 rounded border border-slate-800 text-green-300 flex items-center gap-2 self-start sm:self-auto"
+            >
+                <Search size={14} class="text-slate-300" />
+                {t("page.projects.rows", projects.length)}
+            </div>
+        </header>
+
+        <div
+            class="bg-[#0a0a0a] border border-slate-800/80 rounded-lg shadow-2xl overflow-hidden"
+        >
+            <table class="w-full text-left text-sm font-mono block lg:table">
+                <thead
+                    class="hidden lg:table-header-group bg-slate-900/50 text-slate-300 border-b border-slate-800/80"
+                >
+                    <tr>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.id")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.details")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.stack")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.version")}</th>
+                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.status")}</th>
+                    </tr>
+                </thead>
+                <tbody
+                    class="block lg:table-row-group divide-y divide-slate-800/50 text-slate-300"
+                >
+                    {
+                        projects.map((proj) => (
+                            <tr class="block lg:table-row hover:bg-slate-800/30 transition-colors group p-5 lg:p-0">
+                                <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-3 lg:mb-0">
+                                    <div class="flex items-center justify-between lg:block">
+                                        <span class="text-green-500 lg:text-slate-300 font-bold lg:font-normal text-xs lg:text-sm">
+                                            {proj.id}
+                                        </span>
+                                        <div class="lg:hidden">
+                                            <span
+                                                class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide ${getStatusStyle(proj.status)}`}
+                                            >
+                                                {proj.status}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1 hidden lg:block">
+                                        <span class="text-[10px] text-slate-500">{proj.year}</span>
+                                    </div>
+                                </td>
+
+                                <td class="block lg:table-cell lg:p-4 align-top mb-4 lg:mb-0">
+                                    <div class="flex items-start gap-3 lg:gap-4">
+                                        {proj.logo && (
+                                            <Image
+                                                src={proj.logo}
+                                                alt={`${proj.name} logo`}
+                                                width={48}
+                                                height={48}
+                                                class="w-10 h-10 sm:w-12 sm:h-12 rounded bg-slate-900 border border-slate-700 object-contain p-1 shrink-0 mt-1"
+                                            />
+                                        )}
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <span class="font-bold text-blue-400 group-hover:text-blue-300 transition-colors text-base lg:text-sm">
+                                                    {proj.name}
+                                                </span>
+                                                <span class="text-[10px] bg-slate-800/50 text-slate-400 px-1.5 py-0.5 rounded border border-slate-700/50">
+                                                    {proj.license}
+                                                </span>
+                                                {proj.github && (
+                                                    <a
+                                                        href={proj.github}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="text-slate-300 hover:text-white transition-colors ml-1"
+                                                    >
+                                                        <Github size={16} class="lg:w-4 lg:h-4" />
+                                                    </a>
+                                                )}
+                                                {proj.url && (
+                                                    <a
+                                                        href={proj.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="text-slate-300 hover:text-blue-400 transition-colors"
+                                                    >
+                                                        <ExternalLink size={16} class="lg:w-4 lg:h-4" />
+                                                    </a>
+                                                )}
+                                            </div>
+                                            <p class="text-xs text-slate-400 lg:text-slate-300 max-w-sm leading-relaxed mb-2">
+                                                {proj.description[currentLang] || proj.description.en}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-3 lg:mb-0">
+                                    <div class="flex gap-2 flex-wrap">
+                                        {proj.stack.map((tech) => (
+                                            <span class="text-[10px] bg-slate-900 px-2 py-0.5 rounded border border-slate-700 text-slate-300">
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </td>
+
+                                <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-2 lg:mb-0">
+                                    <span class="text-slate-300 text-xs lg:text-sm font-bold font-mono">
+                                        {proj.version}
+                                    </span>
+                                </td>
+
+                                <td class="hidden lg:table-cell p-4 align-top pt-5">
+                                    <span
+                                        class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide font-bold ${getStatusStyle(proj.status)}`}
+                                    >
+                                        {proj.status}
+                                    </span>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</Layout>

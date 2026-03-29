@@ -1,0 +1,95 @@
+---
+import { siteConfig } from "../../config/site";
+import { projects } from "../../content/projects";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const currentLang = lang as "en" | "tr";
+const t = useTranslations(lang);
+
+const localizedDeveloper = {
+    ...siteConfig.developer,
+    role: siteConfig.developer.role[currentLang] || siteConfig.developer.role.en,
+    bio: siteConfig.developer.bio[currentLang] || siteConfig.developer.bio.en,
+};
+
+const localizedProjects = projects.map(p => ({
+    ...p,
+    description: p.description[currentLang] || p.description.en
+}));
+
+const terminalData = { 
+    developer: localizedDeveloper, 
+    socials: siteConfig.socials,
+    projects: localizedProjects 
+};
+
+const i18nData = {
+    querying: t("term.querying"),
+    rowsAffected: t("term.rowsAffected"),
+    help: t("term.help"),
+    catMissing: t("term.catMissing"),
+    catDenied: t("term.catDenied"),
+    catBinary: t("term.catBinary"),
+    catNoFile: t("term.catNoFile"),
+    ping: t("term.ping"),
+    coffee: t("term.coffee"),
+    sudo: [t("term.sudo0"), t("term.sudo1"), t("term.sudo2"), t("term.sudo3"), t("term.sudo4")],
+    notFound: t("term.notFound"),
+    colId: t("table.id"),
+    colName: t("table.details"),
+    colStatus: t("table.status"),
+    colVersion: t("table.version"),
+    colYear: t("table.year")
+};
+
+const configJson = JSON.stringify(terminalData);
+const i18nJson = JSON.stringify(i18nData);
+---
+
+<sys-terminal
+    data-config={configJson}
+    data-i18n={i18nJson}
+    class="flex h-135 bg-[#0A0A0A] border border-slate-800 rounded-lg shadow-2xl overflow-hidden font-mono text-sm flex-col w-full"
+>
+    <header
+        class="bg-[#050505] border-b border-slate-800/80 p-2 flex items-center gap-2 shrink-0 select-none"
+    >
+        <div class="flex gap-1.5 ml-1">
+            <div class="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors"></div>
+        </div>
+        <span class="ml-2 text-[10px] text-slate-300 tracking-widest uppercase">root@{siteConfig.developer.alias} ~ /bin/bash</span>
+    </header>
+
+    <main
+        class="flex-1 overflow-y-auto p-4 text-slate-300 cursor-text scroll-smooth"
+        id="terminal-scroll"
+    >
+        <div id="terminal-output" class="space-y-1 mb-2">
+            <p class="text-green-500 font-bold">{t("terminal.welcome")}</p>
+            <p class="text-slate-300 mb-4">
+                {t("terminal.hint").replace("'help'", "").split("").join("")}
+                <span class="text-green-300">'help'</span>
+                {t("terminal.hint").split("'help'")[1]}
+            </p>
+        </div>
+
+        <form id="terminal-form" class="flex items-center">
+            <label for="terminal-input" class="sr-only">{t("terminal.sr_only")}</label>
+            <span class="text-green-500 mr-2 font-bold" aria-hidden="true">➜</span>
+            <span class="text-blue-400 mr-2 font-bold" aria-hidden="true">~</span>
+            <input
+                id="terminal-input"
+                type="text"
+                class="flex-1 bg-transparent border-none outline-none text-slate-300 caret-green-500 font-mono"
+                autofocus
+                autocomplete="off"
+                spellcheck="false"
+            />
+        </form>
+    </main>
+</sys-terminal>
+
+<script src="./terminal.ts"></script>
