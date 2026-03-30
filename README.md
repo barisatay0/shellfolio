@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" alt="Shellfolio Logo" width="200" />
+  <img src="https://github.com/user-attachments/assets/331695e2-6646-4e4b-b48c-75c5218399da" alt="Shellfolio Logo" width="200" />
 </p>
 
 <h1 align="center">Shellfolio</h1>

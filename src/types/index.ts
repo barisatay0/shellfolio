@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 export interface LocalizedString {
   en: string;
   tr: string;
@@ -12,6 +14,7 @@ export interface SiteConfig {
     system: string;
     bio: LocalizedString;
     avatar?: string;
+    resume?: string;
   };
   socials: Record<string, string>;
 }
@@ -21,7 +24,7 @@ export interface SkillGroup {
   items: string[];
 }
 
-export type ProjectStatus = "ACTIVE" | "WIP" | "MAINTAINED" | "ARCHIVED";
+export type ProjectStatus = "DEVELOPMENT" | "MAINTAINED" | "UNMAINTAINED";
 
 export interface Project {
   id: string;
@@ -29,11 +32,22 @@ export interface Project {
   description: LocalizedString;
   url?: string;
   github?: string;
-  logo?: string;
-  images?: string[];
+  logo?: ImageMetadata;
+  images?: ImageMetadata[];
   stack: string[];
   status: ProjectStatus;
   version: string;
   year: string;
   license: string;
+}
+
+export interface Experience {
+  id: string;
+  company: string;
+  role: LocalizedString;
+  type: string;
+  duration: LocalizedString;
+  description: LocalizedString;
+  stack: string[];
+  url?: string;
 }

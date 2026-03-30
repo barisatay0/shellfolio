@@ -11,9 +11,11 @@ export const siteConfig: SiteConfig = {
     system: "x86_64 Arch Linux",
     bio: {
       en: "Obsessed with performance and architecture. I don't just write code that works — I design and build systems that scale. Focusing on type-safe, high-performance backends using modern runtimes.",
-      tr: "Performans ve mimari tutkunu. Sadece çalışan kodlar yazmıyor, ölçeklenebilir sistemler tasarlıyor ve inşa ediyorum. Modern çalışma zamanlarını kullanarak tip güvenli ve yüksek performanslı sistemlere odaklanıyorum.",
+      tr: "Performans ve mimari tutkunu. Sadece çalışan kodlar yazmıyor, ölçeklenebilir sistemler tasarlıyor ve inşa ediyorum. Tip güvenli ve yüksek performanslı sistemlere odaklanıyorum.",
     },
     avatar: "https://avatars.githubusercontent.com/u/114981821?v=4",
+    resume:
+      "https://github.com/user-attachments/files/26342591/Baris_Atay_Backend_Developer_Resume.pdf",
   },
   socials: {
     github: "https://github.com/barisatay0",

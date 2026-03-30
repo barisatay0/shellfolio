@@ -12,9 +12,14 @@ interface Props {
     description?: string;
 }
 
-const { title, description = siteConfig.developer.bio } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const currentLang = lang as "en" | "tr";
 const t = useTranslations(lang);
+
+const defaultDescription =
+    siteConfig.developer.bio[currentLang] || siteConfig.developer.bio.en;
+
+const { title, description = defaultDescription } = Astro.props;
 ---
 
 <!doctype html>

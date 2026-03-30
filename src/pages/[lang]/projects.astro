@@ -15,13 +15,11 @@ const t = useTranslations(lang);
 
 const getStatusStyle = (status: string) => {
     switch (status) {
-        case "ACTIVE":
-            return "bg-green-500/10 text-green-300 border-green-500/20";
-        case "WIP":
-            return "bg-blue-500/10 text-blue-300 border-blue-500/20";
+        case "DEVELOPMENT":
+            return "bg-green-500/10 text-green-400 border-green-500/20";
         case "MAINTAINED":
-            return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
-        case "ARCHIVED":
+            return "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        case "UNMAINTAINED":
             return "bg-slate-500/10 text-slate-400 border-slate-500/20";
         default:
             return "bg-slate-500/10 text-slate-400 border-slate-500/20";
@@ -61,11 +59,26 @@ const getStatusStyle = (status: string) => {
                     class="hidden lg:table-header-group bg-slate-900/50 text-slate-300 border-b border-slate-800/80"
                 >
                     <tr>
-                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.id")}</th>
-                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.details")}</th>
-                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.stack")}</th>
-                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.version")}</th>
-                        <th class="p-4 font-semibold uppercase tracking-wider text-xs">{t("table.status")}</th>
+                        <th
+                            class="p-4 font-semibold uppercase tracking-wider text-xs"
+                            >{t("table.id")}</th
+                        >
+                        <th
+                            class="p-4 font-semibold uppercase tracking-wider text-xs"
+                            >{t("table.details")}</th
+                        >
+                        <th
+                            class="p-4 font-semibold uppercase tracking-wider text-xs"
+                            >{t("table.stack")}</th
+                        >
+                        <th
+                            class="p-4 font-semibold uppercase tracking-wider text-xs"
+                            >{t("table.version")}</th
+                        >
+                        <th
+                            class="p-4 font-semibold uppercase tracking-wider text-xs"
+                            >{t("table.status")}</th
+                        >
                     </tr>
                 </thead>
                 <tbody
@@ -81,14 +94,16 @@ const getStatusStyle = (status: string) => {
                                         </span>
                                         <div class="lg:hidden">
                                             <span
-                                                class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide ${getStatusStyle(proj.status)}`}
+                                                class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide font-bold ${getStatusStyle(proj.status)}`}
                                             >
                                                 {proj.status}
                                             </span>
                                         </div>
                                     </div>
                                     <div class="mt-1 hidden lg:block">
-                                        <span class="text-[10px] text-slate-500">{proj.year}</span>
+                                        <span class="text-[10px] text-slate-400">
+                                            {proj.year}
+                                        </span>
                                     </div>
                                 </td>
 
@@ -100,10 +115,13 @@ const getStatusStyle = (status: string) => {
                                                 alt={`${proj.name} logo`}
                                                 width={48}
                                                 height={48}
+                                                format="webp"
+                                                quality={80}
                                                 class="w-10 h-10 sm:w-12 sm:h-12 rounded bg-slate-900 border border-slate-700 object-contain p-1 shrink-0 mt-1"
                                             />
                                         )}
-                                        <div class="flex-1">
+
+                                        <div class="flex-1 min-w-0">
                                             <div class="flex items-center gap-2 mb-1">
                                                 <span class="font-bold text-blue-400 group-hover:text-blue-300 transition-colors text-base lg:text-sm">
                                                     {proj.name}
@@ -116,9 +134,14 @@ const getStatusStyle = (status: string) => {
                                                         href={proj.github}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        class="text-slate-300 hover:text-white transition-colors ml-1"
+                                                        aria-label={`${proj.name} GitHub repository`}
+                                                        class="text-slate-300 hover:text-white transition-colors ml-1 shrink-0"
                                                     >
-                                                        <Github size={16} class="lg:w-4 lg:h-4" />
+                                                        <Github
+                                                            size={16}
+                                                            class="lg:w-4 lg:h-4"
+                                                            aria-hidden="true"
+                                                        />
                                                     </a>
                                                 )}
                                                 {proj.url && (
@@ -126,15 +149,59 @@ const getStatusStyle = (status: string) => {
                                                         href={proj.url}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        class="text-slate-300 hover:text-blue-400 transition-colors"
+                                                        aria-label={`Visit ${proj.name} live site`}
+                                                        class="text-slate-300 hover:text-blue-400 transition-colors shrink-0"
                                                     >
-                                                        <ExternalLink size={16} class="lg:w-4 lg:h-4" />
+                                                        <ExternalLink
+                                                            size={16}
+                                                            class="lg:w-4 lg:h-4"
+                                                            aria-hidden="true"
+                                                        />
                                                     </a>
                                                 )}
                                             </div>
-                                            <p class="text-xs text-slate-400 lg:text-slate-300 max-w-sm leading-relaxed mb-2">
-                                                {proj.description[currentLang] || proj.description.en}
+                                            <p class="text-xs text-slate-400 lg:text-slate-300 leading-relaxed mb-2">
+                                                {proj.description[
+                                                    currentLang
+                                                ] || proj.description.en}
                                             </p>
+
+                                            {proj.images &&
+                                                proj.images.length > 0 && (
+                                                    <div class="flex gap-2 mt-3 overflow-x-auto pb-2 custom-scrollbar">
+                                                        {proj.images.map(
+                                                            (img, index) => (
+                                                                <a
+                                                                    href={
+                                                                        img.src
+                                                                    }
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    class="shrink-0"
+                                                                    aria-label={`View ${proj.name} screenshot ${index + 1}`}
+                                                                >
+                                                                    <Image
+                                                                        src={
+                                                                            img
+                                                                        }
+                                                                        alt={`${proj.name} screenshot ${index + 1}`}
+                                                                        width={
+                                                                            128
+                                                                        }
+                                                                        height={
+                                                                            72
+                                                                        }
+                                                                        format="webp"
+                                                                        quality={
+                                                                            75
+                                                                        }
+                                                                        class="h-16 w-auto rounded border border-slate-700/50 object-cover hover:border-blue-400 transition-colors duration-200"
+                                                                    />
+                                                                </a>
+                                                            ),
+                                                        )}
+                                                    </div>
+                                                )}
                                         </div>
                                     </div>
                                 </td>
