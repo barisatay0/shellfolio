@@ -36,7 +36,7 @@ export interface Project {
   images?: ImageMetadata[];
   stack: string[];
   status: ProjectStatus;
-  version: string;
+  visibility: "PUBLIC" | "PRIVATE";
   year: string;
   license: string;
 }
@@ -46,6 +46,7 @@ export interface Experience {
   company: string;
   role: LocalizedString;
   type: string;
+  workspace: string;
   duration: LocalizedString;
   description: LocalizedString;
   stack: string[];

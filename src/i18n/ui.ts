@@ -20,7 +20,7 @@ export const ui = {
     "table.details": "project_details",
     "table.stack": "tech_stack",
     "table.status": "status",
-    "table.version": "version",
+    "table.visibility": "visibility",
     "table.year": "year",
     "mobile.techStack": "Tech Stack",
 
@@ -82,7 +82,7 @@ export const ui = {
     "table.details": "proje_detaylari",
     "table.stack": "teknoloji_yigini",
     "table.status": "durum",
-    "table.version": "versiyon",
+    "table.visibility": "görünürlük",
     "table.year": "yil",
     "mobile.techStack": "Teknolojiler",
 

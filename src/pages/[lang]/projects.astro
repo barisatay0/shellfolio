@@ -25,6 +25,17 @@ const getStatusStyle = (status: string) => {
             return "bg-slate-500/10 text-slate-400 border-slate-500/20";
     }
 };
+
+const getVisibilityStyle = (visibility: string) => {
+    switch (visibility) {
+        case "PUBLIC":
+            return "bg-green-500/10 text-green-400 border-green-500/20";
+        case "PRIVATE":
+            return "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        default:
+            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
+    }
+};
 ---
 
 <Layout title={t("page.projects.title")}>
@@ -73,7 +84,7 @@ const getStatusStyle = (status: string) => {
                         >
                         <th
                             class="p-4 font-semibold uppercase tracking-wider text-xs"
-                            >{t("table.version")}</th
+                            >{t("table.visibility")}</th
                         >
                         <th
                             class="p-4 font-semibold uppercase tracking-wider text-xs"
@@ -217,8 +228,10 @@ const getStatusStyle = (status: string) => {
                                 </td>
 
                                 <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-2 lg:mb-0">
-                                    <span class="text-slate-300 text-xs lg:text-sm font-bold font-mono">
-                                        {proj.version}
+                                    <span
+                                        class={`text-[10px] px-2 py-1 rounded border tracking-widest font-bold ${getVisibilityStyle(proj.visibility)}`}
+                                    >
+                                        {proj.visibility}
                                     </span>
                                 </td>
 
