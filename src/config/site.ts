@@ -1,4 +1,5 @@
 import type { SiteConfig } from "../types";
+import resumePdf from "../assets/resume.pdf";
 
 export const siteConfig: SiteConfig = {
   developer: {
@@ -14,8 +15,7 @@ export const siteConfig: SiteConfig = {
       tr: "Performans ve mimari tutkunu. Sadece çalışan kodlar yazmıyor, ölçeklenebilir sistemler tasarlıyor ve inşa ediyorum. Tip güvenli ve yüksek performanslı sistemlere odaklanıyorum.",
     },
     avatar: "https://avatars.githubusercontent.com/u/114981821?v=4",
-    resume:
-      "https://github.com/user-attachments/files/26342591/Baris_Atay_Backend_Developer_Resume.pdf",
+    resume: resumePdf,
   },
   socials: {
     github: "https://github.com/barisatay0",

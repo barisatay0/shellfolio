@@ -1,0 +1,27 @@
+---
+import { Search } from "lucide-astro";
+
+interface Props {
+    title: string;
+    subtitle: string;
+    countText: string;
+}
+
+const { title, subtitle, countText } = Astro.props;
+---
+
+<header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+        <h1 class="text-xl text-white font-bold flex items-center gap-2">
+            <slot name="icon" />
+            {title}
+        </h1>
+        <p class="text-xs text-slate-400 mt-1">
+            {subtitle}
+        </p>
+    </div>
+    <div class="text-xs font-mono bg-[#0a0a0a] py-1.5 px-3 rounded border border-slate-800 text-green-300 flex items-center gap-2 self-start sm:self-auto shrink-0">
+        <Search size={14} class="text-slate-400" />
+        {countText}
+    </div>
+</header>

@@ -4,6 +4,7 @@ import { Database, Search, Github, ExternalLink } from "lucide-astro";
 import { projects } from "../../content/projects";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { Image } from "astro:assets";
+import PageHeader from "../../components/common/PageHeader.astro";
 
 export function getStaticPaths() {
     return [{ params: { lang: "en" } }, { params: { lang: "tr" } }];
@@ -13,55 +14,39 @@ const lang = getLangFromUrl(Astro.url);
 const currentLang = lang as "en" | "tr";
 const t = useTranslations(lang);
 
-const getStatusStyle = (status: string) => {
-    switch (status) {
-        case "DEVELOPMENT":
-            return "bg-green-500/10 text-green-400 border-green-500/20";
-        case "MAINTAINED":
-            return "bg-blue-500/10 text-blue-400 border-blue-500/20";
-        case "UNMAINTAINED":
-            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
-        default:
-            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
-    }
+type BadgeType = "green" | "blue" | "gray";
+
+const getBadgeStyle = (type: BadgeType) => {
+    const base =
+        "text-[10px] px-2 py-1 rounded-full border tracking-wide font-bold";
+    const colors = {
+        green: "bg-green-500/10 text-green-400 border-green-500/20",
+        blue: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+        gray: "bg-slate-500/10 text-slate-400 border-slate-500/20",
+    };
+    return `${base} ${colors[type]}`;
 };
 
-const getVisibilityStyle = (visibility: string) => {
-    switch (visibility) {
-        case "PUBLIC":
-            return "bg-green-500/10 text-green-400 border-green-500/20";
-        case "PRIVATE":
-            return "bg-blue-500/10 text-blue-400 border-blue-500/20";
-        default:
-            return "bg-slate-500/10 text-slate-400 border-slate-500/20";
-    }
+const resolveStatusColor = (status: string): BadgeType => {
+    if (status === "DEVELOPMENT") return "green";
+    if (status === "MAINTAINED") return "blue";
+    return "gray";
+};
+
+const resolveVisibilityColor = (visibility: string): BadgeType => {
+    return visibility === "PUBLIC" ? "green" : "blue";
 };
 ---
 
 <Layout title={t("page.projects.title")}>
     <div class="space-y-6">
-        <header
-            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        <PageHeader
+            title={t("page.projects.query")}
+            subtitle={t("page.projects.subtitle")}
+            countText={t("page.projects.rows", projects.length)}
         >
-            <div>
-                <h1
-                    class="text-xl text-white font-bold flex items-center gap-2"
-                >
-                    <Database class="text-blue-500" size={24} />
-                    {t("page.projects.query")}
-                </h1>
-                <p class="text-xs text-slate-300 mt-1">
-                    {t("page.projects.subtitle")}
-                </p>
-            </div>
-            <div
-                class="text-xs font-mono bg-[#0a0a0a] py-1.5 px-3 rounded border border-slate-800 text-green-300 flex items-center gap-2 self-start sm:self-auto"
-            >
-                <Search size={14} class="text-slate-300" />
-                {t("page.projects.rows", projects.length)}
-            </div>
-        </header>
-
+            <Database slot="icon" class="text-blue-500" size={24} />
+        </PageHeader>
         <div
             class="bg-[#0a0a0a] border border-slate-800/80 rounded-lg shadow-2xl overflow-hidden"
         >
@@ -103,9 +88,22 @@ const getVisibilityStyle = (visibility: string) => {
                                         <span class="text-green-500 lg:text-slate-300 font-bold lg:font-normal text-xs lg:text-sm">
                                             {proj.id}
                                         </span>
-                                        <div class="lg:hidden">
+                                        <div class="lg:hidden flex gap-2">
                                             <span
-                                                class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide font-bold ${getStatusStyle(proj.status)}`}
+                                                class={getBadgeStyle(
+                                                    resolveVisibilityColor(
+                                                        proj.visibility,
+                                                    ),
+                                                )}
+                                            >
+                                                {proj.visibility}
+                                            </span>
+                                            <span
+                                                class={getBadgeStyle(
+                                                    resolveStatusColor(
+                                                        proj.status,
+                                                    ),
+                                                )}
                                             >
                                                 {proj.status}
                                             </span>
@@ -227,9 +225,13 @@ const getVisibilityStyle = (visibility: string) => {
                                     </div>
                                 </td>
 
-                                <td class="block lg:table-cell lg:p-4 align-top lg:pt-5 mb-2 lg:mb-0">
+                                <td class="hidden lg:table-cell lg:p-4 align-top lg:pt-5 mb-2 lg:mb-0">
                                     <span
-                                        class={`text-[10px] px-2 py-1 rounded border tracking-widest font-bold ${getVisibilityStyle(proj.visibility)}`}
+                                        class={getBadgeStyle(
+                                            resolveVisibilityColor(
+                                                proj.visibility,
+                                            ),
+                                        )}
                                     >
                                         {proj.visibility}
                                     </span>
@@ -237,7 +239,9 @@ const getVisibilityStyle = (visibility: string) => {
 
                                 <td class="hidden lg:table-cell p-4 align-top pt-5">
                                     <span
-                                        class={`text-[10px] px-2.5 py-1 rounded-full border tracking-wide font-bold ${getStatusStyle(proj.status)}`}
+                                        class={getBadgeStyle(
+                                            resolveStatusColor(proj.status),
+                                        )}
                                     >
                                         {proj.status}
                                     </span>
