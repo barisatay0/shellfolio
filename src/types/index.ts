@@ -25,30 +25,39 @@ export interface SkillGroup {
 }
 
 export type ProjectStatus = "DEVELOPMENT" | "MAINTAINED" | "UNMAINTAINED";
+export type Visibility = "PUBLIC" | "PRIVATE";
 
-export interface Project {
+interface BaseContent {
   id: string;
-  name: string;
   description: LocalizedString;
+  stack: string[];
   url?: string;
+}
+
+export interface Project extends BaseContent {
+  name: string;
   github?: string;
   logo?: ImageMetadata;
   images?: ImageMetadata[];
-  stack: string[];
   status: ProjectStatus;
-  visibility: "PUBLIC" | "PRIVATE";
+  visibility: Visibility;
   year: string;
   license: string;
 }
 
-export interface Experience {
-  id: string;
+export interface CompanyProject {
+  name: string;
+  description: LocalizedString;
+  url?: string;
+  logo?: ImageMetadata;
+  images?: ImageMetadata[];
+}
+
+export interface Experience extends BaseContent {
   company: string;
   role: LocalizedString;
   type: string;
   workspace: string;
   duration: LocalizedString;
-  description: LocalizedString;
-  stack: string[];
-  url?: string;
+  projects?: CompanyProject[];
 }

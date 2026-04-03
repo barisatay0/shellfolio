@@ -2,12 +2,8 @@ import type { Project, SkillGroup } from "../types";
 
 import bedestLogo from "../assets/logo.bedest.png";
 import shellfolioLogo from "../assets/logo.shellfolio.png";
-import reneryoLogo from "../assets/logo.reneryo.png";
-
-import reneryo1 from "../assets/reneryo1.webp";
-import reneryo2 from "../assets/reneryo2.webp";
-import reneryo3 from "../assets/reneryo3.webp";
-import reneryo4 from "../assets/reneryo4.webp";
+import typenvimLogo from "../assets/logo.typenvim.png";
+import bagentsLogo from "../assets/logo.bagents.png";
 
 import typenvim1 from "../assets/typenvim1.png";
 import typenvim2 from "../assets/typenvim2.png";
@@ -15,59 +11,34 @@ import typenvim3 from "../assets/typenvim3.png";
 
 export const skills: SkillGroup[] = [
     {
-        "category": "Languages",
-        "items": ["TypeScript", "JavaScript", "Rust"]
+        category: "Languages",
+        items: ["TypeScript", "JavaScript", "Rust"],
     },
     {
-        "category": "Backend & Runtime",
-        "items": ["Node.js", "Bun.js", "ElysiaJS", "Hono"]
+        category: "Backend & Runtime",
+        items: ["Node.js", "Bun.js", "ElysiaJS", "Hono"],
     },
     {
-        "category": "Database",
-        "items": ["PostgreSQL", "MySQL", "TimescaleDB", "Prisma", "Drizzle ORM"]
+        category: "Database",
+        items: ["PostgreSQL", "MySQL", "TimescaleDB", "Prisma", "Drizzle ORM"],
     },
     {
-        "category": "DevOps & Cloud",
-        "items": ["Docker", "Amazon S3"]
+        category: "DevOps & Cloud",
+        items: ["Docker", "Amazon S3"],
     },
     {
-        "category": "Observability",
-        "items": ["OpenTelemetry", "Grafana Loki", "Grafana Tempo"]
+        category: "Observability",
+        items: ["OpenTelemetry", "Grafana Loki", "Grafana Tempo"],
     },
     {
-        "category": "Message Brokers",
-        "items": ["RabbitMQ", "Mosquitto"]
-    }
+        category: "Message Brokers",
+        items: ["RabbitMQ", "Mosquitto"],
+    },
 ];
 
 export const projects: Project[] = [
     {
         id: "01",
-        name: "reneryo",
-        description: {
-            en: "An AI-powered, real-time energy management platform optimizing industrial efficiency and carbon footprint. Features a predictive AI Decision-Making Engine and an interactive Digital Intelligent Assistant (DIA).",
-            tr: "Endüstriyel verimliliği ve karbon ayak izini optimize eden yapay zeka destekli, gerçek zamanlı enerji yönetim platformu. Tahmine dayalı Yapay Zeka Karar Motoru ve Dijital Akıllı Asistan (DIA) içerir.",
-        },
-        url: "https://reneryo.com",
-        logo: reneryoLogo,
-        images: [reneryo1, reneryo2, reneryo3, reneryo4],
-        stack: [
-            "Bun",
-            "Node.js",
-            "Rust",
-            "Hono",
-            "PostgreSQL",
-            "TimescaleDB",
-            "RabbitMQ",
-            "Docker",
-        ],
-        status: "MAINTAINED",
-        visibility: "PRIVATE",
-        year: "2025+",
-        license: "CLOSED",
-    },
-    {
-        id: "02",
         name: "bedest",
         description: {
             en: "A production-ready, strictly typed backend foundation built for B2B SaaS and scalable microservices. Powered by Bun, ElysiaJS, and Drizzle ORM.",
@@ -82,7 +53,38 @@ export const projects: Project[] = [
         license: "MIT",
     },
     {
+        id: "02",
+        name: "bagents",
+        description: {
+            en: "An autonomous, end-to-end software engineering orchestration engine built in Rust. Leverages multi-agent state machines, Tree-sitter AST parsing, and deterministic verification loops to autonomously resolve GitHub issues via production-ready PRs.",
+            tr: "Rust ile geliştirilmiş otonom, uçtan uca yazılım mühendisliği orkestrasyon motoru. GitHub sorunlarını üretim kalitesinde PR'lara dönüştürmek için çoklu ajan mimarisi, Tree-sitter AST analizi ve otomatik doğrulama döngüleri kullanır.",
+        },
+        github: "https://github.com/barisatay0/bagents",
+        logo: bagentsLogo,
+        stack: ["Rust", "Tokio", "Tree-sitter", "GitHub API"],
+        status: "MAINTAINED",
+        visibility: "PUBLIC",
+        year: "2026+",
+        license: "MIT",
+    },
+    {
         id: "03",
+        name: "typenvim",
+        description: {
+            en: "A highly optimized, modular Neovim configuration built for speed and muscle memory. Features direct test mappings and fast search.",
+            tr: "Hız ve kas hafızası için oluşturulmuş, yüksek düzeyde optimize edilmiş, modüler bir Neovim yapılandırması. Doğrudan test atamaları ve hızlı arama içerir.",
+        },
+        github: "https://github.com/barisatay0/typenvim",
+        logo: typenvimLogo,
+        stack: ["Lua", "Neovim"],
+        images: [typenvim1, typenvim2, typenvim3],
+        status: "MAINTAINED",
+        visibility: "PUBLIC",
+        year: "2025+",
+        license: "OSS",
+    },
+    {
+        id: "04",
         name: "shellfolio",
         description: {
             en: "A high-performance, terminal-styled portfolio website built with Astro, TypeScript, and Tailwind CSS. Designed for developers who live in the command line.",
@@ -92,25 +94,10 @@ export const projects: Project[] = [
         github: "https://github.com/barisatay0/shellfolio",
         logo: shellfolioLogo,
         stack: ["Astro", "TypeScript", "TailwindCSS"],
-        status: "DEVELOPMENT",
+        status: "UNMAINTAINED",
         visibility: "PUBLIC",
         year: "2026+",
         license: "MIT",
-    },
-    {
-        id: "04",
-        name: "typenvim",
-        description: {
-            en: "A highly optimized, modular Neovim configuration built for speed and muscle memory. Features direct test mappings and fast search.",
-            tr: "Hız ve kas hafızası için oluşturulmuş, yüksek düzeyde optimize edilmiş, modüler bir Neovim yapılandırması. Doğrudan test atamaları ve hızlı arama içerir.",
-        },
-        github: "https://github.com/barisatay0/typenvim",
-        stack: ["Lua", "Neovim"],
-        images: [typenvim1, typenvim2, typenvim3],
-        status: "MAINTAINED",
-        visibility: "PUBLIC",
-        year: "2025+",
-        license: "OSS",
     },
     {
         id: "05",

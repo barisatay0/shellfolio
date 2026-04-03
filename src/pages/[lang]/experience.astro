@@ -3,6 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import { Briefcase, Search, ExternalLink } from "lucide-astro";
 import { experiences } from "../../content/experience";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import PageHeader from "../../components/common/PageHeader.astro";
+import { Image } from "astro:assets";
 
 export function getStaticPaths() {
     return [{ params: { lang: "en" } }, { params: { lang: "tr" } }];
@@ -15,27 +17,13 @@ const t = useTranslations(lang);
 
 <Layout title={t("page.experience.title")}>
     <div class="space-y-8">
-        <header
-            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        <PageHeader
+            title={t("page.experience.query")}
+            subtitle={t("page.experience.subtitle")}
+            countText={t("page.experience.entries", experiences.length)}
         >
-            <div>
-                <h1
-                    class="text-xl text-white font-bold flex items-center gap-2"
-                >
-                    <Briefcase class="text-green-500" size={24} />
-                    {t("page.experience.query")}
-                </h1>
-                <p class="text-xs text-slate-400 mt-1">
-                    {t("page.experience.subtitle")}
-                </p>
-            </div>
-            <div
-                class="text-xs font-mono bg-[#0a0a0a] py-1.5 px-3 rounded border border-slate-800 text-green-300 flex items-center gap-2 self-start sm:self-auto"
-            >
-                <Search size={14} class="text-slate-400" />
-                {t("page.experience.entries", experiences.length)}
-            </div>
-        </header>
+            <Briefcase slot="icon" class="text-green-500" size={24} />
+        </PageHeader>
 
         <div
             class="bg-[#0a0a0a] border border-slate-800/80 rounded-lg shadow-2xl p-6 md:p-8"
@@ -100,6 +88,93 @@ const t = useTranslations(lang);
                                     </span>
                                 ))}
                             </div>
+
+                            {exp.projects && exp.projects.length > 0 && (
+                                <div class="mt-6 pt-5 border-t border-slate-800/50">
+                                    <h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">
+                                        {currentLang === "tr"
+                                            ? "Geliştirilen Ürünler / Projeler"
+                                            : "Key Projects / Products"}
+                                    </h4>
+                                    <div class="space-y-4">
+                                        {exp.projects.map((project) => (
+                                            <div class="bg-slate-900/30 border border-slate-800/60 rounded-md p-4">
+                                                <div class="flex items-center gap-3 mb-3">
+                                                    {project.logo && (
+                                                        <Image
+                                                            src={project.logo}
+                                                            alt={`${project.name} logo`}
+                                                            width={32}
+                                                            height={32}
+                                                            class="w-8 h-8 rounded bg-slate-900 border border-slate-700 object-contain p-1 shrink-0"
+                                                        />
+                                                    )}
+                                                    <div class="flex items-center gap-2">
+                                                        <span class="text-sm font-bold text-blue-400">
+                                                            {project.name}
+                                                        </span>
+                                                        {project.url && (
+                                                            <a
+                                                                href={
+                                                                    project.url
+                                                                }
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                aria-label={`Visit ${project.name}`}
+                                                                class="text-slate-500 hover:text-blue-400 transition-colors"
+                                                            >
+                                                                <ExternalLink
+                                                                    size={14}
+                                                                />
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                                    {project.description[
+                                                        currentLang
+                                                    ] || project.description.en}
+                                                </p>
+
+                                                {project.images &&
+                                                    project.images.length >
+                                                        0 && (
+                                                        <div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+                                                            {project.images.map(
+                                                                (img, idx) => (
+                                                                    <a
+                                                                        href={
+                                                                            img.src
+                                                                        }
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        class="shrink-0"
+                                                                        aria-label={`View screenshot ${idx + 1}`}
+                                                                    >
+                                                                        <Image
+                                                                            src={
+                                                                                img
+                                                                            }
+                                                                            alt={`${project.name} screenshot ${idx + 1}`}
+                                                                            width={
+                                                                                128
+                                                                            }
+                                                                            height={
+                                                                                72
+                                                                            }
+                                                                            class="h-16 w-auto rounded border border-slate-700/50 object-cover hover:border-blue-400 transition-colors duration-200"
+                                                                        />
+                                                                    </a>
+                                                                ),
+                                                            )}
+                                                        </div>
+                                                    )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ))
                 }

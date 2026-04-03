@@ -6,10 +6,13 @@ import { defaultLang } from "../i18n/ui";
 <html lang="en" style="background-color: #000;">
     <head>
         <meta charset="UTF-8" />
-        <meta http-equiv="refresh" content={`0;url=/${defaultLang}`} />
         <title>Terminal Loading...</title>
-        <script define:vars={{ lang: defaultLang }}>
-            window.location.replace(`/${lang}`);
+        <script>
+            const browserLang = navigator.language || (navigator as any).userLanguage;
+            
+            const targetLang = browserLang.toLowerCase().startsWith('tr') ? 'tr' : 'en';
+            
+            window.location.replace(`/${targetLang}`);
         </script>
     </head>
     <body style="background-color: #000;"> </body>
