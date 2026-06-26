@@ -12,27 +12,50 @@ import typenvim3 from "../assets/typenvim3.png";
 export const skills: SkillGroup[] = [
     {
         category: "Languages",
-        items: ["TypeScript", "JavaScript", "Rust"],
+        items: ["TypeScript", "JavaScript", "Rust", "SQL", "Python"],
     },
     {
-        category: "Backend & Runtime",
-        items: ["Node.js", "Bun.js", "ElysiaJS", "Hono"],
+        category: "Frameworks & Libraries",
+        items: [
+            "Node.js", "Bun.js", "Express.js", "Elysia", "Hono", 
+            "Drizzle", "Prisma", "Typeorm", "Zod", "Swagger", "OpenAPI"
+        ],
     },
     {
-        category: "Database",
-        items: ["PostgreSQL", "MySQL", "TimescaleDB", "Prisma", "Drizzle ORM"],
+        category: "Databases & Message Queues",
+        items: [
+            "PostgreSQL", "TimescaleDB", "MySQL", "SQLite", "MongoDB", 
+            "NoSQL", "Elasticsearch", "Redis", "RabbitMQ", "Mosquitto", 
+            "Kafka", "MQTT"
+        ],
     },
     {
-        category: "DevOps & Cloud",
-        items: ["Docker", "Amazon S3"],
+        category: "Architecture & Culture",
+        items: [
+            "Microservices", "Clean Architecture", "DDD", "TDD", "OOP", 
+            "Clean Code", "Design Patterns", "Agile", "Sprint", 
+            "Iterations", "Peer Programming", "Distributed Systems"
+        ],
     },
     {
-        category: "Observability",
-        items: ["OpenTelemetry", "Grafana Loki", "Grafana Tempo"],
+        category: "Testing & Observability",
+        items: [
+            "Vitest", "Jest", "Unit Test", "E2E Test", "Linting", "Eslint", 
+            "Open Telemetry", "Grafana", "Loki", "Tempo", "Logging", "Monitoring"
+        ],
     },
     {
-        category: "Message Brokers",
-        items: ["RabbitMQ", "Mosquitto"],
+        category: "Cloud & Devops",
+        items: [
+            "AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Github", 
+            "Github Actions", "Gitlab", "Linux", "Azure", "Lambda", 
+            "EC2", "S3 Compatible", "Cloudflare DNS", "Vercel", 
+            "Railway", "Supabase"
+        ],
+    },
+    {
+        category: "AI & Automation",
+        items: ["Ai Workflow", "Agents", "Claude"],
     },
 ];
 

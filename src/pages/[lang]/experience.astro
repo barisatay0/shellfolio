@@ -1,9 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Briefcase, Search, ExternalLink } from "lucide-astro";
+import { Briefcase, ExternalLink, Calendar } from "lucide-astro";
 import { experiences } from "../../content/experience";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import PageHeader from "../../components/common/PageHeader.astro";
 import { Image } from "astro:assets";
 
 export function getStaticPaths() {
@@ -17,167 +16,123 @@ const t = useTranslations(lang);
 
 <Layout title={t("page.experience.title")}>
     <div class="space-y-8">
-        <PageHeader
-            title={t("page.experience.query")}
-            subtitle={t("page.experience.subtitle")}
-            countText={t("page.experience.entries", experiences.length)}
-        >
-            <Briefcase slot="icon" class="text-green-500" size={24} />
-        </PageHeader>
+        <header class="mb-12">
+            <h1 class="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                <Briefcase class="text-green-500" size={28} />
+                {t("page.experience.title")}
+            </h1>
+            <p class="text-slate-400">{t("page.experience.entries", experiences.length)}</p>
+        </header>
 
-        <div
-            class="bg-[#0a0a0a] border border-slate-800/80 rounded-lg shadow-2xl p-6 md:p-8"
-        >
-            <div
-                class="relative border-l border-slate-800 ml-3 md:ml-4 space-y-10 pb-4"
-            >
-                {
-                    experiences.map((exp, index) => (
-                        <div
-                            class="relative pl-8 md:pl-10 group animate-in fade-in slide-in-from-bottom-4"
-                            style={`animation-delay: ${index * 100}ms; animation-fill-mode: both;`}
-                        >
-                            <div class="absolute w-4 h-4 bg-[#0a0a0a] border-2 border-slate-700 group-hover:border-green-500 rounded-full -left-[8.5px] top-1 transition-colors duration-300">
-                                <div class="absolute inset-0 bg-green-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity blur-[2px]" />
-                            </div>
+        <div class="relative max-w-4xl mx-auto">
+            <!-- Timeline Line -->
+            <div class="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-green-500/50 via-white/10 to-transparent"></div>
 
-                            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-2">
-                                <div class="flex items-center gap-3 flex-wrap">
-                                    <h3 class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">
+            <div class="space-y-12">
+                {experiences.map((exp, index) => (
+                    <div class="relative pl-12 md:pl-24 group">
+                        <!-- Timeline Node -->
+                        <div class="absolute left-[11px] md:left-[27px] top-1.5 w-3 h-3 rounded-full bg-black border-2 border-green-500 group-hover:bg-green-500 transition-colors duration-500 shadow-[0_0_10px_rgba(34,197,94,0.5)] z-10"></div>
+                        <div class="absolute left-[15px] md:left-[31px] top-3 h-px w-8 md:w-16 bg-white/10 group-hover:bg-green-500/50 transition-colors duration-500 z-0"></div>
+
+                        <div class="glass-panel p-6 md:p-8 hover:border-green-500/30 transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_10px_40px_-10px_rgba(34,197,94,0.1)]">
+                            <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">
                                         {exp.role[currentLang] || exp.role.en}
                                     </h3>
-                                    <span class="text-[10px] bg-slate-900 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                                        {exp.type}
-                                    </span>
-                                    <span class="text-[10px] bg-slate-900 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                                        {exp.workspace}
-                                    </span>
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="text-lg text-slate-300 font-medium">@ {exp.company}</span>
+                                        {exp.url && (
+                                            <a href={exp.url} target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-green-400 transition-colors">
+                                                <ExternalLink size={16} />
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
-                                <span class="text-xs text-slate-500 font-mono shrink-0">
-                                    {exp.duration[currentLang] ||
-                                        exp.duration.en}
-                                </span>
+                                <div class="flex flex-col md:items-end gap-2 shrink-0">
+                                    <div class="flex items-center gap-2 text-sm text-green-400 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20 font-medium">
+                                        <Calendar size={14} />
+                                        {exp.duration[currentLang] || exp.duration.en}
+                                    </div>
+                                    <div class="flex gap-2 text-xs text-slate-400 uppercase tracking-wider font-semibold">
+                                        <span class="bg-white/5 px-2 py-1 rounded border border-white/5">{exp.type}</span>
+                                        <span class="bg-white/5 px-2 py-1 rounded border border-white/5">{exp.workspace}</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="flex items-center gap-2 mb-4">
-                                <span class="text-sm text-slate-400 font-medium">
-                                    @ {exp.company}
-                                </span>
-                                {exp.url && (
-                                    <a
-                                        href={exp.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="text-slate-500 hover:text-blue-400 transition-colors"
-                                        aria-label={`Visit ${exp.company} website`}
-                                    >
-                                        <ExternalLink size={14} />
-                                    </a>
-                                )}
-                            </div>
-
-                            <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                                {exp.description[currentLang] ||
-                                    exp.description.en}
+                            <p class="text-base text-slate-300 leading-relaxed mb-6">
+                                {exp.description[currentLang] || exp.description.en}
                             </p>
 
-                            <div class="flex gap-2 flex-wrap">
+                            <div class="flex flex-wrap gap-2 mb-8">
                                 {exp.stack.map((tech) => (
-                                    <span class="text-[10px] bg-slate-900/50 px-2 py-1 rounded border border-slate-800 text-slate-400">
+                                    <span class="text-xs bg-white/5 text-slate-300 px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/20 transition-colors cursor-default">
                                         {tech}
                                     </span>
                                 ))}
                             </div>
 
                             {exp.projects && exp.projects.length > 0 && (
-                                <div class="mt-6 pt-5 border-t border-slate-800/50">
-                                    <h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">
-                                        {currentLang === "tr"
-                                            ? "Geliştirilen Ürünler / Projeler"
-                                            : "Key Projects / Products"}
+                                <div class="mt-8 pt-6 border-t border-white/5">
+                                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">
+                                        {currentLang === "tr" ? "Geliştirilen Ürünler / Projeler" : "Key Projects / Products"}
                                     </h4>
-                                    <div class="space-y-4">
+                                    <div class="grid grid-cols-1 gap-4">
                                         {exp.projects.map((project) => (
-                                            <div class="bg-slate-900/30 border border-slate-800/60 rounded-md p-4">
-                                                <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-black/20 border border-white/5 rounded-xl p-5 hover:bg-white/[0.02] transition-colors">
+                                                <div class="flex items-center gap-4 mb-3">
                                                     {project.logo && (
-                                                        <Image
-                                                            src={project.logo}
-                                                            alt={`${project.name} logo`}
-                                                            width={32}
-                                                            height={32}
-                                                            class="w-8 h-8 rounded bg-slate-900 border border-slate-700 object-contain p-1 shrink-0"
-                                                        />
+                                                        <div class="w-10 h-10 rounded-lg bg-white/5 p-1.5 border border-white/10 shrink-0">
+                                                            <Image
+                                                                src={project.logo}
+                                                                alt={`${project.name} logo`}
+                                                                width={32}
+                                                                height={32}
+                                                                class="w-full h-full object-contain"
+                                                            />
+                                                        </div>
                                                     )}
                                                     <div class="flex items-center gap-2">
-                                                        <span class="text-sm font-bold text-blue-400">
+                                                        <span class="text-base font-bold text-white">
                                                             {project.name}
                                                         </span>
                                                         {project.url && (
-                                                            <a
-                                                                href={
-                                                                    project.url
-                                                                }
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                aria-label={`Visit ${project.name}`}
-                                                                class="text-slate-500 hover:text-blue-400 transition-colors"
-                                                            >
-                                                                <ExternalLink
-                                                                    size={14}
-                                                                />
+                                                            <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-green-400 transition-colors">
+                                                                <ExternalLink size={14} />
                                                             </a>
                                                         )}
                                                     </div>
                                                 </div>
 
-                                                <p class="text-xs text-slate-400 leading-relaxed mb-3">
-                                                    {project.description[
-                                                        currentLang
-                                                    ] || project.description.en}
+                                                <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                                                    {project.description[currentLang] || project.description.en}
                                                 </p>
 
-                                                {project.images &&
-                                                    project.images.length >
-                                                        0 && (
-                                                        <div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
-                                                            {project.images.map(
-                                                                (img, idx) => (
-                                                                    <a
-                                                                        href={
-                                                                            img.src
-                                                                        }
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        class="shrink-0"
-                                                                        aria-label={`View screenshot ${idx + 1}`}
-                                                                    >
-                                                                        <Image
-                                                                            src={
-                                                                                img
-                                                                            }
-                                                                            alt={`${project.name} screenshot ${idx + 1}`}
-                                                                            width={
-                                                                                128
-                                                                            }
-                                                                            height={
-                                                                                72
-                                                                            }
-                                                                            class="h-16 w-auto rounded border border-slate-700/50 object-cover hover:border-blue-400 transition-colors duration-200"
-                                                                        />
-                                                                    </a>
-                                                                ),
-                                                            )}
-                                                        </div>
-                                                    )}
+                                                {project.images && project.images.length > 0 && (
+                                                    <div class="flex gap-3 overflow-x-auto pb-2 custom-scrollbar">
+                                                        {project.images.map((img, idx) => (
+                                                            <a href={img.src} target="_blank" rel="noopener noreferrer" class="shrink-0 overflow-hidden rounded-lg border border-white/10">
+                                                                <Image
+                                                                    src={img}
+                                                                    alt={`${project.name} screenshot ${idx + 1}`}
+                                                                    width={200}
+                                                                    height={112}
+                                                                    class="h-24 w-auto object-cover hover:scale-105 transition-transform duration-500"
+                                                                />
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                )}
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                             )}
                         </div>
-                    ))
-                }
+                    </div>
+                ))}
             </div>
         </div>
     </div>
