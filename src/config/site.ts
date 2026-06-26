@@ -1,25 +1,24 @@
 import type { SiteConfig } from "../types";
-import resumePdf from "../assets/resume.pdf";
 
 export const siteConfig: SiteConfig = {
   developer: {
-    name: "Barış Atay",
-    alias: "barisatay0",
+    name: "Alex Developer",
+    alias: "alexdev",
     role: {
-      en: "Software Developer",
-      tr: "Yazılım Geliştirici",
+      en: "Software Engineer",
+      tr: "Yazılım Mühendisi",
     },
-    system: "x86_64 Arch Linux",
+    system: "MacOS Sequoia",
     bio: {
-      en: "Obsessed with performance and architecture. I don't just write code that works — I design and build systems that scale. Focusing on type-safe, high-performance backends using modern runtimes.",
+      en: "Obsessed with performance and architecture. I design and build systems that scale. Focusing on type-safe, high-performance backends using modern runtimes.",
       tr: "Performans ve mimari tutkunu. Sadece çalışan kodlar yazmıyor, ölçeklenebilir sistemler tasarlıyor ve inşa ediyorum. Tip güvenli ve yüksek performanslı sistemlere odaklanıyorum.",
     },
-    avatar: "https://avatars.githubusercontent.com/u/114981821?v=4",
-    resume: resumePdf,
+    avatar: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&q=80&w=400&h=400",
   },
   socials: {
-    github: "https://github.com/barisatay0",
-    linkedin: "https://www.linkedin.com/in/barış-atay",
-    email: "mailto:barisatay0@hotmail.com",
+    github: "https://github.com/alexdev",
+    linkedin: "https://linkedin.com/in/alexdev",
+    email: "mailto:hello@alexdev.com",
   },
 };
+

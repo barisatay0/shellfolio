@@ -1,153 +1,90 @@
 import type { Project, SkillGroup } from "../types";
 
-import bedestLogo from "../assets/logo.bedest.png";
-import shellfolioLogo from "../assets/logo.shellfolio.png";
-import typenvimLogo from "../assets/logo.typenvim.png";
-import bagentsLogo from "../assets/logo.bagents.png";
-
-import typenvim1 from "../assets/typenvim1.png";
-import typenvim2 from "../assets/typenvim2.png";
-import typenvim3 from "../assets/typenvim3.png";
+export const projects: Project[] = [
+    {
+        id: "PRJ-001",
+        name: "E-Commerce Dashboard",
+        description: {
+            en: "A comprehensive dashboard for managing e-commerce operations. Features real-time sales tracking, inventory management, and automated reporting.",
+            tr: "E-ticaret operasyonlarını yönetmek için kapsamlı bir kontrol paneli. Gerçek zamanlı satış takibi, envanter yönetimi ve otomatik raporlama özelliklerine sahip."
+        },
+        stack: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Prisma", "PostgreSQL"],
+        visibility: "PUBLIC",
+        status: "MAINTAINED",
+        year: 2024,
+        license: "MIT",
+        github: "https://github.com/alexdev",
+        url: "https://example.com",
+        images: [
+            { src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000", alt: "Dashboard Home" },
+            { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", alt: "Analytics View" }
+        ]
+    },
+    {
+        id: "PRJ-002",
+        name: "Task Management SaaS",
+        description: {
+            en: "A scalable SaaS platform for remote teams to collaborate efficiently. Integrates with Slack, Google Drive, and features a kanban board system.",
+            tr: "Uzaktan çalışan ekiplerin verimli bir şekilde işbirliği yapması için ölçeklenebilir bir SaaS platformu. Slack ve Google Drive ile entegre, kanban panosu sistemine sahip."
+        },
+        stack: ["Vue.js", "Nuxt", "Node.js", "Express", "MongoDB", "Redis"],
+        visibility: "PUBLIC",
+        status: "DEVELOPMENT",
+        year: 2023,
+        license: "Apache 2.0",
+        github: "https://github.com/alexdev",
+        images: [
+            { src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000", alt: "Kanban Board" }
+        ]
+    },
+    {
+        id: "PRJ-003",
+        name: "AI Content Generator",
+        description: {
+            en: "An AI-powered tool that generates blog posts, social media content, and marketing copy using OpenAI's GPT-4 API.",
+            tr: "OpenAI'ın GPT-4 API'sini kullanarak blog yazıları, sosyal medya içeriği ve pazarlama metinleri oluşturan yapay zeka destekli bir araç."
+        },
+        stack: ["Python", "FastAPI", "React", "OpenAI API", "Docker", "AWS"],
+        visibility: "PRIVATE",
+        status: "MAINTAINED",
+        year: 2023,
+        license: "Proprietary",
+        images: [
+            { src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000", alt: "AI Generation Interface" }
+        ]
+    },
+    {
+        id: "PRJ-004",
+        name: "Crypto Portfolio Tracker",
+        description: {
+            en: "A mobile-first web application for tracking cryptocurrency investments, analyzing market trends, and setting price alerts.",
+            tr: "Kripto para yatırımlarını takip etmek, piyasa trendlerini analiz etmek ve fiyat alarmları ayarlamak için mobil öncelikli bir web uygulaması."
+        },
+        stack: ["Svelte", "SvelteKit", "TypeScript", "Tailwind CSS", "CoinGecko API"],
+        visibility: "PUBLIC",
+        status: "ARCHIVED",
+        year: 2022,
+        license: "MIT",
+        github: "https://github.com/alexdev",
+        url: "https://example.com"
+    }
+];
 
 export const skills: SkillGroup[] = [
     {
         category: "Languages",
-        items: ["TypeScript", "JavaScript", "Rust", "SQL", "Python"],
+        items: ["TypeScript", "JavaScript", "Python", "Rust", "Go", "SQL", "HTML/CSS"],
     },
     {
-        category: "Frameworks & Libraries",
-        items: [
-            "Node.js", "Bun.js", "Express.js", "Elysia", "Hono", 
-            "Drizzle", "Prisma", "Typeorm", "Zod", "Swagger", "OpenAPI"
-        ],
+        category: "Frontend",
+        items: ["React", "Next.js", "Vue.js", "Astro", "Tailwind CSS", "Redux", "Framer Motion"],
     },
     {
-        category: "Databases & Message Queues",
-        items: [
-            "PostgreSQL", "TimescaleDB", "MySQL", "SQLite", "MongoDB", 
-            "NoSQL", "Elasticsearch", "Redis", "RabbitMQ", "Mosquitto", 
-            "Kafka", "MQTT"
-        ],
+        category: "Backend",
+        items: ["Node.js", "Express", "NestJS", "FastAPI", "PostgreSQL", "MongoDB", "Redis", "Prisma"],
     },
     {
-        category: "Architecture & Culture",
-        items: [
-            "Microservices", "Clean Architecture", "DDD", "TDD", "OOP", 
-            "Clean Code", "Design Patterns", "Agile", "Sprint", 
-            "Iterations", "Peer Programming", "Distributed Systems"
-        ],
-    },
-    {
-        category: "Testing & Observability",
-        items: [
-            "Vitest", "Jest", "Unit Test", "E2E Test", "Linting", "Eslint", 
-            "Open Telemetry", "Grafana", "Loki", "Tempo", "Logging", "Monitoring"
-        ],
-    },
-    {
-        category: "Cloud & Devops",
-        items: [
-            "AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Github", 
-            "Github Actions", "Gitlab", "Linux", "Azure", "Lambda", 
-            "EC2", "S3 Compatible", "Cloudflare DNS", "Vercel", 
-            "Railway", "Supabase"
-        ],
-    },
-    {
-        category: "AI & Automation",
-        items: ["Ai Workflow", "Agents", "Claude"],
-    },
-];
-
-export const projects: Project[] = [
-    {
-        id: "01",
-        name: "bedest",
-        description: {
-            en: "A production-ready, strictly typed backend foundation built for B2B SaaS and scalable microservices. Powered by Bun, ElysiaJS, and Drizzle ORM.",
-            tr: "B2B SaaS ve ölçeklenebilir mikroservisler için üretime hazır, tip destekli backend altyapısı. Bun, ElysiaJS ve Drizzle ORM ile güçlendirildi.",
-        },
-        github: "https://github.com/bedest-hq/bedest",
-        logo: bedestLogo,
-        stack: ["Bun", "Elysia", "PostgreSQL", "Docker"],
-        status: "MAINTAINED",
-        visibility: "PUBLIC",
-        year: "2026+",
-        license: "MIT",
-    },
-    {
-        id: "02",
-        name: "bagents",
-        description: {
-            en: "An autonomous, end-to-end software engineering orchestration engine built in Rust. Leverages multi-agent state machines, Tree-sitter AST parsing, and deterministic verification loops to autonomously resolve GitHub issues via production-ready PRs.",
-            tr: "Rust ile geliştirilmiş otonom, uçtan uca yazılım mühendisliği orkestrasyon motoru. GitHub sorunlarını üretim kalitesinde PR'lara dönüştürmek için çoklu ajan mimarisi, Tree-sitter AST analizi ve otomatik doğrulama döngüleri kullanır.",
-        },
-        github: "https://github.com/barisatay0/bagents",
-        logo: bagentsLogo,
-        stack: ["Rust", "Tokio", "Tree-sitter", "GitHub API"],
-        status: "MAINTAINED",
-        visibility: "PUBLIC",
-        year: "2026+",
-        license: "MIT",
-    },
-    {
-        id: "03",
-        name: "typenvim",
-        description: {
-            en: "A highly optimized, modular Neovim configuration built for speed and muscle memory. Features direct test mappings and fast search.",
-            tr: "Hız ve kas hafızası için oluşturulmuş, yüksek düzeyde optimize edilmiş, modüler bir Neovim yapılandırması. Doğrudan test atamaları ve hızlı arama içerir.",
-        },
-        github: "https://github.com/barisatay0/typenvim",
-        logo: typenvimLogo,
-        stack: ["Lua", "Neovim"],
-        images: [typenvim1, typenvim2, typenvim3],
-        status: "MAINTAINED",
-        visibility: "PUBLIC",
-        year: "2025+",
-        license: "OSS",
-    },
-    {
-        id: "04",
-        name: "shellfolio",
-        description: {
-            en: "A high-performance, terminal-styled portfolio website built with Astro, TypeScript, and Tailwind CSS. Designed for developers who live in the command line.",
-            tr: "Astro, TypeScript ve Tailwind CSS ile oluşturulmuş, yüksek performanslı, terminal temalı portfolyo web sitesi. Komut satırında yaşayan geliştiriciler için tasarlandı.",
-        },
-        url: "https://www.barisatay.com",
-        github: "https://github.com/barisatay0/shellfolio",
-        logo: shellfolioLogo,
-        stack: ["Astro", "TypeScript", "TailwindCSS"],
-        status: "UNMAINTAINED",
-        visibility: "PUBLIC",
-        year: "2026+",
-        license: "MIT",
-    },
-    {
-        id: "05",
-        name: "imap-viewer",
-        description: {
-            en: "A simple, lightweight Python application for retrieving and displaying emails using the IMAP protocol.",
-            tr: "IMAP protokolünü kullanarak e-postaları almak ve görüntülemek için basit ve hafif bir Python uygulaması.",
-        },
-        github: "https://github.com/barisatay0/imap-email-viewer",
-        stack: ["Python", "IMAP"],
-        status: "UNMAINTAINED",
-        visibility: "PUBLIC",
-        year: "2024",
-        license: "OSS",
-    },
-    {
-        id: "06",
-        name: "social-media-platform",
-        description: {
-            en: "A Totally Professional Social Media Site™ where HTML, CSS, JS, and PHP coexist in chaos. Features a global chat where you can't see your own messages.",
-            tr: "HTML, CSS, JS ve PHP'nin kaos içinde bir arada yaşadığı 'Tamamen Profesyonel' bir Sosyal Medya Sitesi™. Kendi mesajlarınızı göremediğiniz bir global sohbet içerir.",
-        },
-        github: "https://github.com/barisatay0/Social-Media-Platform",
-        stack: ["PHP", "JavaScript", "Bootstrap"],
-        status: "UNMAINTAINED",
-        visibility: "PUBLIC",
-        year: "2024",
-        license: "OSS",
+        category: "Tools",
+        items: ["Git", "Docker", "AWS", "GitHub Actions", "Vercel", "Figma", "Linux", "Nginx"],
     },
 ];

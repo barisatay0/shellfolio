@@ -1,50 +1,76 @@
 import type { Experience } from "../types";
 
-import reneryoLogo from "../assets/logo.reneryo.png";
-import reneryo1 from "../assets/reneryo1.webp";
-import reneryo2 from "../assets/reneryo2.webp";
-import reneryo3 from "../assets/reneryo3.webp";
-import reneryo4 from "../assets/reneryo4.webp";
-
 export const experiences: Experience[] = [
-  {
-    id: "EXP-01",
-    company: "A Arti Engineering",
-    role: {
-      en: "Backend Developer",
-      tr: "Backend Geliştirici",
-    },
-    type: "Full-time",
-    workspace: "Hybrid",
-    duration: {
-      en: "Jul 2024 - Present",
-      tr: "Tem 2024 - Günümüz",
-    },
-    description: {
-      en: "Designed and implemented high-performance, event-driven backend services using Node.js and Bun. Developed microservices communicating via RabbitMQ and Mosquitto, and optimized complex queries with PostgreSQL and TimescaleDB. Built modern, lightweight APIs with Hono. Delegated CPU-intensive and analytical tasks to high-performance background workers written in Rust. Applied Clean Architecture, Domain-Driven Design (DDD), and Docker-based CI/CD pipelines.",
-      tr: "Node.js ve Bun kullanarak yüksek performanslı, event-driven backend servisleri mimarisi tasarladım ve geliştirdim. RabbitMQ ve Mosquitto ile güvenilir mikroservis iletişimi kurdum, PostgreSQL ve TimescaleDB ile veritabanı sorgularını optimize ettim. Hono ile hafif API'ler oluşturdum. İşlemci yoğunluklu analiz görevlerini Rust ile yazılmış yüksek performanslı arka plan worker'larına devrettim. Clean Architecture, DDD ve Docker tabanlı CI/CD süreçlerini uyguladım.",
-    },
-    stack: [
-      "Bun",
-      "Node.js",
-      "Rust",
-      "Hono",
-      "PostgreSQL",
-      "TimescaleDB",
-      "RabbitMQ",
-      "Docker",
-    ],
-    projects: [
-      {
-        name: "Reneryo",
-        description: {
-          en: "An AI-powered, real-time energy management platform optimizing industrial efficiency and carbon footprint. Features a predictive AI Decision-Making Engine and an interactive Digital Intelligent Assistant (DIA).",
-          tr: "Endüstriyel verimliliği ve karbon ayak izini optimize eden yapay zeka destekli, gerçek zamanlı enerji yönetim platformu. Tahmine dayalı Yapay Zeka Karar Motoru ve Dijital Akıllı Asistan (DIA) içerir.",
+    {
+        id: "EXP-001",
+        company: "TechFlow Inc.",
+        role: {
+            en: "Senior Full-Stack Engineer",
+            tr: "Kıdemli Tam Yığın Geliştirici",
         },
-        url: "https://reneryo.com",
-        logo: reneryoLogo,
-        images: [reneryo1, reneryo2, reneryo3, reneryo4],
-      },
-    ],
-  },
+        type: "FULL-TIME",
+        workspace: "REMOTE",
+        duration: {
+            en: "Jan 2022 - Present",
+            tr: "Oca 2022 - Günümüz",
+        },
+        url: "https://example.com",
+        description: {
+            en: "Led the development of a microservices-based architecture for a high-traffic SaaS platform. Managed a team of 5 developers and improved system performance by 40%.",
+            tr: "Yüksek trafikli bir SaaS platformu için mikroservis tabanlı mimari geliştirmesine liderlik ettim. 5 kişilik bir geliştirici ekibini yönettim ve sistem performansını %40 artırdım.",
+        },
+        stack: ["Node.js", "React", "PostgreSQL", "Docker", "AWS", "Kubernetes"],
+        projects: [
+            {
+                name: "TechFlow Core API",
+                description: {
+                    en: "A robust GraphQL API handling over 1M requests per day.",
+                    tr: "Günde 1 milyondan fazla isteği işleyen güçlü bir GraphQL API.",
+                },
+                images: [
+                    { src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1000", alt: "API Dashboard" }
+                ],
+                url: "https://example.com/api"
+            }
+        ]
+    },
+    {
+        id: "EXP-002",
+        company: "Creative Digital",
+        role: {
+            en: "Frontend Developer",
+            tr: "Önyüz Geliştirici",
+        },
+        type: "FULL-TIME",
+        workspace: "HYBRID",
+        duration: {
+            en: "Mar 2020 - Dec 2021",
+            tr: "Mar 2020 - Ara 2021",
+        },
+        url: "https://example.com",
+        description: {
+            en: "Developed responsive and accessible web interfaces for enterprise clients. Collaborated closely with the design team to implement pixel-perfect UI components.",
+            tr: "Kurumsal müşteriler için duyarlı ve erişilebilir web arayüzleri geliştirdim. Piksel mükemmelliğinde UI bileşenleri oluşturmak için tasarım ekibiyle yakından çalıştım.",
+        },
+        stack: ["Vue.js", "JavaScript", "SCSS", "Figma", "Jest"],
+    },
+    {
+        id: "EXP-003",
+        company: "StartupInc",
+        role: {
+            en: "Junior Developer",
+            tr: "Geliştirici",
+        },
+        type: "PART-TIME",
+        workspace: "OFFICE",
+        duration: {
+            en: "Jun 2018 - Feb 2020",
+            tr: "Haz 2018 - Şub 2020",
+        },
+        description: {
+            en: "Maintained legacy PHP applications and migrated them to modern JavaScript frameworks. Assisted in database design and optimization.",
+            tr: "Eski PHP uygulamalarının bakımını yaptım ve onları modern JavaScript çerçevelerine taşıdım. Veritabanı tasarımı ve optimizasyonuna yardımcı oldum.",
+        },
+        stack: ["PHP", "MySQL", "jQuery", "Bootstrap"],
+    }
 ];

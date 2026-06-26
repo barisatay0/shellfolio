@@ -53,13 +53,10 @@ const resolveVisibilityColor = (visibility: string): BadgeType => {
                         <div class="flex items-center gap-4">
                             {proj.logo && (
                                 <div class="w-14 h-14 rounded-xl bg-white/[0.03] border border-white/10 p-2 shrink-0 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/[0.05] transition-all duration-300">
-                                    <Image
+                                    <img
                                         src={proj.logo}
                                         alt={`${proj.name} logo`}
-                                        width={48}
-                                        height={48}
-                                        format="webp"
-                                        quality={90}
+                                        loading="lazy"
                                         class="w-full h-full object-contain"
                                     />
                                 </div>
@@ -97,13 +94,10 @@ const resolveVisibilityColor = (visibility: string): BadgeType => {
                         <div class="flex gap-3 mb-6 overflow-x-auto pb-2 custom-scrollbar">
                             {proj.images.map((img, index) => (
                                 <a href={img.src} target="_blank" rel="noopener noreferrer" class="shrink-0 overflow-hidden rounded-lg border border-white/10 hover:border-green-500/50 transition-colors">
-                                    <Image
-                                        src={img}
+                                    <img
+                                        src={img.src || img}
                                         alt={`${proj.name} screenshot ${index + 1}`}
-                                        width={240}
-                                        height={135}
-                                        format="webp"
-                                        quality={80}
+                                        loading="lazy"
                                         class="h-20 w-auto object-cover hover:scale-105 transition-transform duration-500"
                                     />
                                 </a>
