@@ -1,10 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { siteConfig } from "../../config/site";
-import { skills } from "../../content/projects";
-import { FileText, Mail, Terminal } from "lucide-astro";
+import { FileText, Mail, ArrowUpRight, Github, Linkedin, Briefcase } from "lucide-astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import { Image } from "astro:assets";
 
 export function getStaticPaths() {
     return [{ params: { lang: "en" } }, { params: { lang: "tr" } }];
@@ -16,117 +14,77 @@ const t = useTranslations(lang);
 ---
 
 <Layout title={t("dashboard.title")}>
-    <div class="space-y-8">
-        <section
-            class="bg-slate-900/50 border border-slate-800/60 rounded-lg p-6 sm:p-8 relative overflow-hidden backdrop-blur-sm flex flex-col sm:flex-row gap-6 items-center sm:items-start text-center sm:text-left"
-        >
-            {
-                siteConfig.developer.avatar && (
-                    <div class="relative shrink-0 group">
-                        <div class="absolute inset-0 bg-green-500/20 blur-xl rounded-full group-hover:bg-green-500/30 transition-all duration-300" />
-                        <Image
-                            src={siteConfig.developer.avatar}
-                            alt="Developer Avatar"
-                            width={96}
-                            height={96}
-                            format="webp"
-                            quality={85}
-                            class="relative w-28 h-28 sm:w-24 sm:h-24 rounded-xl border border-slate-700 sm:border-green-500/50 object-cover shadow-[0_0_15px_rgba(34,197,94,0.1)] grayscale hover:grayscale-0 transition-all duration-300 z-10"
-                        />
-                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-slate-900 rounded-full animate-pulse z-20 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-                    </div>
-                )
-            }
-            <div
-                class="flex-1 w-full flex flex-col items-center sm:items-start"
-            >
-                <h1
-                    class="text-2xl sm:text-3xl font-bold text-white mb-2 wrap-break-word"
-                >
-                    <span class="text-green-500"
-                        >{t("dashboard.developer")}</span
-                    >"{siteConfig.developer.name}";
-                </h1>
-                <p
-                    class="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed mb-6"
-                >
-                    {
-                        siteConfig.developer.bio[currentLang] ||
-                            siteConfig.developer.bio.en
-                    }
-                </p>
-
-                <div
-                    class="flex flex-wrap justify-center sm:justify-start gap-3 w-full"
-                >
-                    {
-                        Object.entries(siteConfig.socials).map(
-                            ([platform, url]) => (
-                                <a
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="text-[10px] sm:text-xs uppercase tracking-widest text-slate-300 hover:text-green-300 border border-slate-800 hover:border-green-500/50 px-4 py-2 rounded transition-colors bg-slate-950"
-                                >
-                                    {platform}
-                                </a>
-                            ),
-                        )
-                    }
-                </div>
-
-                <div
-                    class="flex flex-wrap justify-center sm:justify-start gap-4 mt-6 pt-6 border-t border-slate-800/50 w-full"
-                >
-                    {
-                        siteConfig.developer.resume && (
-                            <a
-                                href={siteConfig.developer.resume}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="bg-green-500 text-black text-xs font-bold px-4 py-2.5 rounded hover:bg-green-400 transition-colors flex items-center gap-2"
-                            >
-                                <FileText size={16} />
-                                {t("dashboard.resume")}
-                            </a>
-                        )
-                    }
-                    <a
-                        href={siteConfig.socials.email}
-                        class="border border-slate-700 text-slate-300 text-xs font-bold px-4 py-2.5 rounded hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-2"
-                    >
-                        <Mail size={16} />
-                        {t("dashboard.contact")}
-                    </a>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Hero/Bio Card -->
+        <div class="md:col-span-2 row-span-2 glass-panel p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
+                <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 transform rotate-12 group-hover:rotate-0 transition-transform duration-700"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             </div>
-        </section>
-
-        <section>
-            <h2
-                class="text-sm text-slate-300 mb-4 flex items-center gap-2 uppercase tracking-wider"
-            >
-                <Terminal size={16} />
-                {t("dashboard.capabilities")}
+            
+            <h1 class="text-3xl sm:text-5xl font-bold text-white mb-4 tracking-tight relative z-10">
+                Hi, I'm <span class="gradient-text">{siteConfig.developer.name}</span>
+            </h1>
+            <h2 class="text-lg sm:text-xl text-green-400 font-mono mb-6 relative z-10">
+                > {siteConfig.developer.role[currentLang]}
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {
-                    skills.map((skillGroup) => (
-                        <div class="bg-slate-950 border border-slate-800/60 p-4 rounded-lg">
-                            <h3 class="text-green-500 text-xs font-bold mb-3 uppercase">
-                                {skillGroup.category}
-                            </h3>
-                            <ul class="flex flex-wrap gap-2">
-                                {skillGroup.items.map((item) => (
-                                    <li class="bg-slate-900 border border-slate-800 px-2 py-1 text-xs rounded text-slate-300">
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))
-                }
+            <p class="text-base sm:text-lg text-slate-300/80 leading-relaxed max-w-xl relative z-10">
+                {siteConfig.developer.bio[currentLang] || siteConfig.developer.bio.en}
+            </p>
+            
+            <div class="flex flex-wrap gap-4 mt-8 relative z-10">
+                {siteConfig.developer.resume && (
+                    <a href={siteConfig.developer.resume} target="_blank" rel="noopener noreferrer" class="bg-white text-black font-semibold px-6 py-3 rounded-xl hover:bg-slate-200 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-white/10 hover:shadow-white/20 hover:-translate-y-0.5">
+                        <FileText size={18} />
+                        {t("dashboard.resume")}
+                    </a>
+                )}
+                <a href={siteConfig.socials.email} class="bg-white/[0.05] border border-white/10 text-white font-medium px-6 py-3 rounded-xl hover:bg-white/[0.1] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5">
+                    <Mail size={18} />
+                    {t("dashboard.contact")}
+                </a>
             </div>
-        </section>
+        </div>
+
+        <!-- Status Card -->
+        <div class="glass-panel p-6 flex flex-col justify-between group hover:border-green-500/30 transition-colors duration-500">
+            <div class="flex justify-between items-start">
+                <div class="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                    <Briefcase class="text-green-400" size={20} />
+                </div>
+                <div class="flex items-center gap-2 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
+                    <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span class="text-xs font-medium text-green-400 uppercase tracking-wider">{t("layout.online")}</span>
+                </div>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-slate-400 text-sm font-medium mb-1">Current Status</h3>
+                <p class="text-white font-semibold">Backend Developer @ A Artı Mühendislik</p>
+            </div>
+        </div>
+
+        <!-- Social Links Bento -->
+        <div class="grid grid-cols-2 gap-4">
+            <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer" class="glass-panel p-6 flex flex-col items-center justify-center gap-3 hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 group">
+                <Github size={32} class="text-slate-300 group-hover:text-white transition-colors" />
+                <span class="text-sm font-medium text-slate-300 group-hover:text-white">GitHub</span>
+            </a>
+            <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" class="glass-panel p-6 flex flex-col items-center justify-center gap-3 hover:bg-[#0077b5]/10 hover:-translate-y-1 hover:border-[#0077b5]/30 transition-all duration-300 group">
+                <Linkedin size={32} class="text-slate-300 group-hover:text-[#0077b5] transition-colors" />
+                <span class="text-sm font-medium text-slate-300 group-hover:text-[#0077b5]">LinkedIn</span>
+            </a>
+        </div>
+
+        <!-- Quick Stats/Tech Stack Preview -->
+        <div class="md:col-span-3 glass-panel p-8 mt-2 flex flex-col sm:flex-row items-center justify-between gap-6 group hover:border-white/10 transition-colors duration-500">
+            <div>
+                <h3 class="text-white font-bold text-lg mb-2">High-Performance Ecosystem</h3>
+                <p class="text-slate-400 text-sm max-w-md">Building scalable systems with Rust, Node.js, and modern databases.</p>
+            </div>
+            <div class="flex gap-4">
+                <a href={`/${lang}/skills`} class="flex items-center gap-2 text-green-400 text-sm font-medium hover:text-green-300 transition-colors group-hover:translate-x-1 duration-300">
+                    Explore full tech stack <ArrowUpRight size={16} />
+                </a>
+            </div>
+        </div>
     </div>
 </Layout>

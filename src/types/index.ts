@@ -61,3 +61,11 @@ export interface Experience extends BaseContent {
   duration: LocalizedString;
   projects?: CompanyProject[];
 }
+
+export interface Education {
+  id: string;
+  degree: string;
+  school: string;
+  duration: string;
+  field: string;
+}

@@ -24,11 +24,11 @@ export const ui = {
         "table.year": "year",
         "mobile.techStack": "Tech Stack",
 
-        "nav.dashboard": "~/dashboard",
-        "nav.projects": "~/projects",
-        "nav.terminal": "~/bin/bash",
-        "nav.kernelAccess": "Kernel Access",
-        "nav.experience": "~/experience",
+        "nav.dashboard": "Dashboard",
+        "nav.projects": "Projects",
+        "nav.experience": "Experience",
+        "nav.skills": "Skills",
+        "nav.education": "Education",
 
         "layout.user": "USER: root",
         "layout.sys": "SYS: {system}",
@@ -91,11 +91,11 @@ export const ui = {
         "table.year": "yil",
         "mobile.techStack": "Teknolojiler",
 
-        "nav.dashboard": "~/kontrol_paneli",
-        "nav.experience": "~/deneyim",
-        "nav.projects": "~/projeler",
-        "nav.terminal": "~/bin/bash",
-        "nav.kernelAccess": "Çekirdek Erişimi",
+        "nav.dashboard": "Kontrol Paneli",
+        "nav.projects": "Projeler",
+        "nav.experience": "Deneyim",
+        "nav.skills": "Yetenekler",
+        "nav.education": "Eğitim",
 
         "layout.user": "KULLANICI: root",
         "layout.sys": "SİSTEM: {system}",
