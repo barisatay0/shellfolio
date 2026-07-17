@@ -68,6 +68,7 @@ export const projects: Project[] = [
             tr: "B2B SaaS ve ölçeklenebilir mikroservisler için üretime hazır, tip destekli backend altyapısı. Bun, ElysiaJS ve Drizzle ORM ile güçlendirildi.",
         },
         github: "https://github.com/bedest-hq/bedest",
+        url: "https://www.bedest.info",
         logo: bedestLogo,
         stack: ["Bun", "Elysia", "PostgreSQL", "Docker"],
         status: "MAINTAINED",
