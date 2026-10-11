@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
@@ -9,49 +11,58 @@
   html {
     @apply antialiased scroll-smooth;
   }
-  body {
-    @apply bg-[#050505] text-slate-300 font-sans;
-  }
 }
 
 * {
-    -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Sleek Scrollbar */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    transition: background 0.3s ease;
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+  background: rgba(148, 163, 184, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
 }
 
 /* Utilities for glassmorphism and animations */
 .glass-panel {
-    @apply bg-white/[0.02] border border-white/[0.05] backdrop-blur-md rounded-2xl;
+  @apply bg-white/75 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.05] backdrop-blur-md rounded-2xl shadow-sm dark:shadow-none transition-all;
 }
 
 .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-200 to-slate-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-slate-100 dark:to-slate-400;
 }
 
 .glow-effect {
-    box-shadow: 0 0 40px -10px rgba(74, 222, 128, 0.15);
+  box-shadow: 0 0 40px -10px rgba(34, 197, 94, 0.15);
 }

@@ -6,6 +6,12 @@ export interface LocalizedString {
   [key: string]: string;
 }
 
+export interface EcosystemConfig {
+  title: LocalizedString;
+  description: LocalizedString;
+  linkText: LocalizedString;
+}
+
 export interface SiteConfig {
   developer: {
     name: string;
@@ -15,12 +21,14 @@ export interface SiteConfig {
     bio: LocalizedString;
     avatar?: string;
     resume?: string;
+    status?: LocalizedString;
   };
   socials: Record<string, string>;
+  ecosystem?: EcosystemConfig;
 }
 
 export interface SkillGroup {
-  category: string;
+  category: LocalizedString | string;
   items: string[];
 }
 
@@ -37,11 +45,11 @@ interface BaseContent {
 export interface Project extends BaseContent {
   name: string;
   github?: string;
-  logo?: ImageMetadata;
-  images?: ImageMetadata[];
+  logo?: ImageMetadata | string;
+  images?: (ImageMetadata | string)[] | any[];
   status: ProjectStatus;
   visibility: Visibility;
-  year: string;
+  year: string | number;
   license: string;
 }
 
@@ -49,8 +57,8 @@ export interface CompanyProject {
   name: string;
   description: LocalizedString;
   url?: string;
-  logo?: ImageMetadata;
-  images?: ImageMetadata[];
+  logo?: ImageMetadata | string;
+  images?: (ImageMetadata | string)[] | any[];
 }
 
 export interface Experience extends BaseContent {
@@ -64,8 +72,9 @@ export interface Experience extends BaseContent {
 
 export interface Education {
   id: string;
-  degree: string;
-  school: string;
-  duration: string;
-  field: string;
+  degree: LocalizedString | string;
+  school: LocalizedString | string;
+  duration: LocalizedString | string;
+  field: LocalizedString | string;
+  description?: LocalizedString | string;
 }

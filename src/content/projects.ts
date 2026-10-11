@@ -11,18 +11,27 @@ import typenvim3 from "../assets/typenvim3.png";
 
 export const skills: SkillGroup[] = [
     {
-        category: "Languages",
+        category: {
+            en: "Languages",
+            tr: "Programlama Dilleri",
+        },
         items: ["TypeScript", "JavaScript", "Rust", "SQL", "Python"],
     },
     {
-        category: "Frameworks & Libraries",
+        category: {
+            en: "Frameworks & Libraries",
+            tr: "Kütüphaneler & Framework'ler",
+        },
         items: [
             "Node.js", "Bun.js", "Express.js", "Elysia", "Hono",
             "Drizzle", "Prisma", "Typeorm", "Zod", "Swagger", "OpenAPI"
         ],
     },
     {
-        category: "Databases & Message Queues",
+        category: {
+            en: "Databases & Message Queues",
+            tr: "Veritabanları & Mesaj Kuyrukları",
+        },
         items: [
             "PostgreSQL", "TimescaleDB", "MySQL", "SQLite", "MongoDB",
             "NoSQL", "Elasticsearch", "Redis", "RabbitMQ", "Mosquitto",
@@ -30,7 +39,10 @@ export const skills: SkillGroup[] = [
         ],
     },
     {
-        category: "Architecture & Culture",
+        category: {
+            en: "Architecture & Culture",
+            tr: "Mimari & Mühendislik Kültürü",
+        },
         items: [
             "Microservices", "Clean Architecture", "DDD", "TDD", "OOP",
             "Clean Code", "Design Patterns", "Agile", "Sprint",
@@ -38,14 +50,20 @@ export const skills: SkillGroup[] = [
         ],
     },
     {
-        category: "Testing & Observability",
+        category: {
+            en: "Testing & Observability",
+            tr: "Test & Gözlemlenebilirlik",
+        },
         items: [
             "Vitest", "Jest", "Unit Test", "E2E Test", "Linting", "Eslint",
             "Open Telemetry", "Grafana", "Loki", "Tempo", "Logging", "Monitoring"
         ],
     },
     {
-        category: "Cloud & Devops",
+        category: {
+            en: "Cloud & Devops",
+            tr: "Bulut & DevOps",
+        },
         items: [
             "AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Github",
             "Github Actions", "Gitlab", "Linux", "Azure", "Lambda",
@@ -54,7 +72,10 @@ export const skills: SkillGroup[] = [
         ],
     },
     {
-        category: "AI & Automation",
+        category: {
+            en: "AI & Automation",
+            tr: "Yapay Zeka & Otomasyon",
+        },
         items: ["Ai Workflow", "Agents", "Claude"],
     },
 ];

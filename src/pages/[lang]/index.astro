@@ -21,24 +21,24 @@ const t = useTranslations(lang);
                 <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 transform rotate-12 group-hover:rotate-0 transition-transform duration-700"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             </div>
             
-            <h1 class="text-3xl sm:text-5xl font-bold text-white mb-4 tracking-tight relative z-10">
-                Hi, I'm <span class="gradient-text">{siteConfig.developer.name}</span>
+            <h1 class="text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight relative z-10">
+                {t("dashboard.hero.greeting")} <span class="gradient-text">{siteConfig.developer.name}</span>
             </h1>
-            <h2 class="text-lg sm:text-xl text-green-400 font-mono mb-6 relative z-10">
+            <h2 class="text-lg sm:text-xl text-green-600 dark:text-green-400 font-mono mb-6 relative z-10">
                 > {siteConfig.developer.role[currentLang]}
             </h2>
-            <p class="text-base sm:text-lg text-slate-300/80 leading-relaxed max-w-xl relative z-10">
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300/80 leading-relaxed max-w-xl relative z-10">
                 {siteConfig.developer.bio[currentLang] || siteConfig.developer.bio.en}
             </p>
             
             <div class="flex flex-wrap gap-4 mt-8 relative z-10">
                 {siteConfig.developer.resume && (
-                    <a href={siteConfig.developer.resume} target="_blank" rel="noopener noreferrer" class="bg-white text-black font-semibold px-6 py-3 rounded-xl hover:bg-slate-200 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-white/10 hover:shadow-white/20 hover:-translate-y-0.5">
+                    <a href={siteConfig.developer.resume} target="_blank" rel="noopener noreferrer" class="bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-black dark:hover:bg-slate-200 font-semibold px-6 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg shadow-slate-900/10 dark:shadow-white/10 hover:-translate-y-0.5">
                         <FileText size={18} />
                         {t("dashboard.resume")}
                     </a>
                 )}
-                <a href={siteConfig.socials.email} class="bg-white/[0.05] border border-white/10 text-white font-medium px-6 py-3 rounded-xl hover:bg-white/[0.1] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5">
+                <a href={siteConfig.socials.email} class="bg-slate-100 dark:bg-white/[0.05] border border-slate-300/80 dark:border-white/10 text-slate-800 dark:text-white font-medium px-6 py-3 rounded-xl hover:bg-slate-200 dark:hover:bg-white/[0.1] transition-all duration-300 flex items-center gap-2 hover:-translate-y-0.5">
                     <Mail size={18} />
                     {t("dashboard.contact")}
                 </a>
@@ -49,40 +49,48 @@ const t = useTranslations(lang);
         <div class="glass-panel p-6 flex flex-col justify-between group hover:border-green-500/30 transition-colors duration-500">
             <div class="flex justify-between items-start">
                 <div class="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20">
-                    <Briefcase class="text-green-400" size={20} />
+                    <Briefcase class="text-green-600 dark:text-green-400" size={20} />
                 </div>
                 <div class="flex items-center gap-2 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
                     <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <span class="text-xs font-medium text-green-400 uppercase tracking-wider">{t("layout.online")}</span>
+                    <span class="text-xs font-medium text-green-600 dark:text-green-400 uppercase tracking-wider">{t("layout.online")}</span>
                 </div>
             </div>
             <div class="mt-8">
-                <h3 class="text-slate-400 text-sm font-medium mb-1">Current Status</h3>
-                <p class="text-white font-semibold">Backend Developer @ A Artı Mühendislik</p>
+                <h3 class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">
+                    {t("dashboard.status.title")}
+                </h3>
+                <p class="text-slate-900 dark:text-white font-semibold">
+                    {siteConfig.developer.status ? (siteConfig.developer.status[currentLang] || siteConfig.developer.status.en) : t("dashboard.status.available")}
+                </p>
             </div>
         </div>
 
         <!-- Social Links Bento -->
         <div class="grid grid-cols-2 gap-4">
-            <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer" class="glass-panel p-6 flex flex-col items-center justify-center gap-3 hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 group">
-                <Github size={32} class="text-slate-300 group-hover:text-white transition-colors" />
-                <span class="text-sm font-medium text-slate-300 group-hover:text-white">GitHub</span>
+            <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer" class="glass-panel p-6 flex flex-col items-center justify-center gap-3 hover:bg-slate-100 dark:hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 group">
+                <Github size={32} class="text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
+                <span class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white">GitHub</span>
             </a>
             <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" class="glass-panel p-6 flex flex-col items-center justify-center gap-3 hover:bg-[#0077b5]/10 hover:-translate-y-1 hover:border-[#0077b5]/30 transition-all duration-300 group">
-                <Linkedin size={32} class="text-slate-300 group-hover:text-[#0077b5] transition-colors" />
-                <span class="text-sm font-medium text-slate-300 group-hover:text-[#0077b5]">LinkedIn</span>
+                <Linkedin size={32} class="text-slate-700 dark:text-slate-300 group-hover:text-[#0077b5] transition-colors" />
+                <span class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-[#0077b5]">LinkedIn</span>
             </a>
         </div>
 
         <!-- Quick Stats/Tech Stack Preview -->
-        <div class="md:col-span-3 glass-panel p-8 mt-2 flex flex-col sm:flex-row items-center justify-between gap-6 group hover:border-white/10 transition-colors duration-500">
+        <div class="md:col-span-3 glass-panel p-8 mt-2 flex flex-col sm:flex-row items-center justify-between gap-6 group hover:border-green-500/30 transition-all duration-500">
             <div>
-                <h3 class="text-white font-bold text-lg mb-2">High-Performance Ecosystem</h3>
-                <p class="text-slate-400 text-sm max-w-md">Building scalable systems with Rust, Node.js, and modern databases.</p>
+                <h3 class="text-slate-900 dark:text-white font-bold text-lg mb-2">
+                    {siteConfig.ecosystem ? (siteConfig.ecosystem.title[currentLang] || siteConfig.ecosystem.title.en) : t("dashboard.ecosystem.title")}
+                </h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm max-w-md">
+                    {siteConfig.ecosystem ? (siteConfig.ecosystem.description[currentLang] || siteConfig.ecosystem.description.en) : t("dashboard.ecosystem.desc")}
+                </p>
             </div>
             <div class="flex gap-4">
-                <a href={`/${lang}/skills`} class="flex items-center gap-2 text-green-400 text-sm font-medium hover:text-green-300 transition-colors group-hover:translate-x-1 duration-300">
-                    Explore full tech stack <ArrowUpRight size={16} />
+                <a href={`/${lang}/skills`} class="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm font-medium hover:text-green-500 dark:hover:text-green-300 transition-colors group-hover:translate-x-1 duration-300">
+                    {siteConfig.ecosystem ? (siteConfig.ecosystem.linkText[currentLang] || siteConfig.ecosystem.linkText.en) : t("dashboard.ecosystem.cta")} <ArrowUpRight size={16} />
                 </a>
             </div>
         </div>

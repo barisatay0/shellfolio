@@ -3,17 +3,25 @@ import { defaultLang } from "../i18n/ui";
 ---
 
 <!doctype html>
-<html lang="en" style="background-color: #000;">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Terminal Loading...</title>
-        <script>
-            const browserLang = navigator.language || (navigator as any).userLanguage;
-            
-            const targetLang = browserLang.toLowerCase().startsWith('tr') ? 'tr' : 'en';
-            
-            window.location.replace(`/${targetLang}`);
+        <title>Loading...</title>
+        <script is:inline>
+            (function () {
+                try {
+                    var stored = localStorage.getItem('preferred_lang');
+                    if (stored === 'tr' || stored === 'en') {
+                        window.location.replace('/' + stored);
+                        return;
+                    }
+                } catch (e) {}
+
+                var navLang = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+                var targetLang = navLang.toLowerCase().startsWith('tr') ? 'tr' : 'en';
+                window.location.replace('/' + targetLang);
+            })();
         </script>
     </head>
-    <body style="background-color: #000;"> </body>
+    <body style="background-color: #050505;"></body>
 </html>
