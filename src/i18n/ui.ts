@@ -11,10 +11,17 @@ export const ui = {
         "page.projects.query": "SELECT * FROM public.projects;",
         "page.projects.subtitle": "Connected to primary database instance.",
         "page.projects.rows": "Query returned {count} rows",
+        "page.projects.repository": "Repository",
+        "page.projects.liveDemo": "Live Demo",
+
         "page.experience.title": "Experience Log",
         "page.experience.query": "cat /var/log/career_history.log",
         "page.experience.subtitle": "Reading professional timeline...",
         "page.experience.entries": "Found {count} entries",
+        "page.experience.projectsTitle": "Key Projects / Products",
+
+        "page.skills.subtitle": "Technical proficiencies and tools",
+        "page.education.subtitle": "Academic background and qualifications",
 
         "table.id": "id",
         "table.details": "project_details",
@@ -36,10 +43,18 @@ export const ui = {
         "layout.online": "ONLINE",
 
         "dashboard.title": "Dashboard",
+        "dashboard.hero.greeting": "Hi, I'm",
         "dashboard.developer": "const developer = ",
         "dashboard.capabilities": "system_capabilities.json",
         "dashboard.resume": "Download Resume",
         "dashboard.contact": "Get in Touch",
+        "dashboard.status.title": "Current Status",
+        "dashboard.status.available": "Available for new opportunities",
+        "dashboard.ecosystem.title": "High-Performance Ecosystem",
+        "dashboard.ecosystem.desc": "Building scalable systems with Rust, Node.js, and modern databases.",
+        "dashboard.ecosystem.cta": "Explore full tech stack",
+
+        "theme.toggle": "Toggle theme",
 
         "terminal.title": "Terminal",
         "terminal.welcome": "AmogOS v1.5.0 (tty1)",
@@ -54,7 +69,8 @@ export const ui = {
         "term.pwd": "/home/{user}/projects",
         "term.mkdirError": "mkdir: cannot create directory '{dir}': Read-only file system",
         "term.rmError": "rm: cannot remove '{file}': Permission denied",
-        "term.date": new Date().toString(), "term.catMissing": "cat: missing file operand",
+        "term.date": new Date().toString(),
+        "term.catMissing": "cat: missing file operand",
         "term.catDenied": "cat: {file}: Permission denied. Nice try, FBI.",
         "term.catBinary":
             "Error: Binary file projects.db matches. Use SQL to query.",
@@ -71,17 +87,23 @@ export const ui = {
             "Error: Permission denied (publickey,password,keyboard-interactive).",
         "term.notFound":
             "bash: {cmd}: command not found. Type 'help' to see valid commands.",
-
     },
     tr: {
         "page.projects.title": "Projeler DB",
         "page.projects.query": "SELECT * FROM public.projects;",
         "page.projects.subtitle": "Birincil veritabanı örneğine bağlanıldı.",
         "page.projects.rows": "Sorgu {count} satır döndürdü",
+        "page.projects.repository": "Kaynak Kod",
+        "page.projects.liveDemo": "Canlı Önizleme",
+
         "page.experience.title": "Deneyim Kayıtları",
         "page.experience.query": "cat /var/log/kariyer_gecmisi.log",
         "page.experience.subtitle": "Profesyonel zaman çizelgesi okunuyor...",
         "page.experience.entries": "{count} kayıt bulundu",
+        "page.experience.projectsTitle": "Geliştirilen Ürünler / Projeler",
+
+        "page.skills.subtitle": "Teknik yetkinlikler ve araçlar",
+        "page.education.subtitle": "Akademik geçmiş ve nitelikler",
 
         "table.id": "id",
         "table.details": "proje_detaylari",
@@ -103,10 +125,18 @@ export const ui = {
         "layout.online": "ÇEVRİMİÇİ",
 
         "dashboard.title": "Kontrol Paneli",
+        "dashboard.hero.greeting": "Merhaba, ben",
         "dashboard.developer": "const gelistirici = ",
         "dashboard.capabilities": "sistem_yetenekleri.json",
         "dashboard.resume": "Özgeçmişi İndir",
         "dashboard.contact": "İletişime Geç",
+        "dashboard.status.title": "Mevcut Durum",
+        "dashboard.status.available": "Yeni fırsatlara açık",
+        "dashboard.ecosystem.title": "Yüksek Performanslı Ekosistem",
+        "dashboard.ecosystem.desc": "Rust, Node.js ve modern veritabanları ile ölçeklenebilir sistemler inşa ediyorum.",
+        "dashboard.ecosystem.cta": "Tüm teknoloji yığınını incele",
+
+        "theme.toggle": "Temayı değiştir",
 
         "terminal.title": "Uçbirim",
         "terminal.welcome": "AmogOS v1.5.0 (tty1)",

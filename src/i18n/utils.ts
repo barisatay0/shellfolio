@@ -1,4 +1,5 @@
 import { ui, defaultLang } from "./ui";
+import type { LocalizedString } from "../types";
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
@@ -29,4 +30,13 @@ export function getRouteWithLang(url: URL, targetLang: string) {
       : url.pathname.replace(/^\//, "");
 
   return `/${targetLang}/${path}`.replace(/\/$/, "");
+}
+
+export function resolveLocalizedString(
+  value: LocalizedString | string | undefined,
+  lang: string
+): string {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value[lang] || value[defaultLang] || "";
 }

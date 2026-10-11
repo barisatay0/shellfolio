@@ -72,19 +72,31 @@ export const projects: Project[] = [
 
 export const skills: SkillGroup[] = [
     {
-        category: "Languages",
+        category: {
+            en: "Languages",
+            tr: "Programlama Dilleri",
+        },
         items: ["TypeScript", "JavaScript", "Python", "Rust", "Go", "SQL", "HTML/CSS"],
     },
     {
-        category: "Frontend",
+        category: {
+            en: "Frontend",
+            tr: "Ön Yüz Teknolojileri",
+        },
         items: ["React", "Next.js", "Vue.js", "Astro", "Tailwind CSS", "Redux", "Framer Motion"],
     },
     {
-        category: "Backend",
+        category: {
+            en: "Backend",
+            tr: "Arka Yüz & Sunucu",
+        },
         items: ["Node.js", "Express", "NestJS", "FastAPI", "PostgreSQL", "MongoDB", "Redis", "Prisma"],
     },
     {
-        category: "Tools",
+        category: {
+            en: "Tools",
+            tr: "Araçlar & DevOps",
+        },
         items: ["Git", "Docker", "AWS", "GitHub Actions", "Vercel", "Figma", "Linux", "Nginx"],
     },
 ];

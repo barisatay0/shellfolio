@@ -9,6 +9,10 @@ export const siteConfig: SiteConfig = {
       tr: "Yazılım Mühendisi",
     },
     system: "MacOS Sequoia",
+    status: {
+      en: "Available for new opportunities",
+      tr: "Yeni fırsatlara açık",
+    },
     bio: {
       en: "Obsessed with performance and architecture. I design and build systems that scale. Focusing on type-safe, high-performance backends using modern runtimes.",
       tr: "Performans ve mimari tutkunu. Sadece çalışan kodlar yazmıyor, ölçeklenebilir sistemler tasarlıyor ve inşa ediyorum. Tip güvenli ve yüksek performanslı sistemlere odaklanıyorum.",
@@ -20,5 +24,18 @@ export const siteConfig: SiteConfig = {
     linkedin: "https://linkedin.com/in/alexdev",
     email: "mailto:hello@alexdev.com",
   },
+  ecosystem: {
+    title: {
+      en: "High-Performance Ecosystem",
+      tr: "Yüksek Performanslı Ekosistem",
+    },
+    description: {
+      en: "Building scalable systems with Rust, Node.js, and modern databases.",
+      tr: "Rust, Node.js ve modern veritabanları ile ölçeklenebilir sistemler inşa ediyorum.",
+    },
+    linkText: {
+      en: "Explore full tech stack",
+      tr: "Tüm teknoloji yığınını incele",
+    },
+  },
 };
-

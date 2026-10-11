@@ -1,8 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { GraduationCap, Calendar, MapPin } from "lucide-astro";
+import { GraduationCap, Calendar } from "lucide-astro";
 import { educations } from "../../content/education";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getLangFromUrl, useTranslations, resolveLocalizedString } from "../../i18n/utils";
 
 export function getStaticPaths() {
     return [{ params: { lang: "en" } }, { params: { lang: "tr" } }];
@@ -15,11 +15,11 @@ const t = useTranslations(lang);
 <Layout title={t("nav.education")}>
     <div class="space-y-8">
         <header class="mb-12">
-            <h1 class="text-3xl font-bold text-white mb-2 flex items-center gap-3">
-                <GraduationCap class="text-green-500" size={28} />
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-3">
+                <GraduationCap class="text-green-600 dark:text-green-500" size={28} />
                 {t("nav.education")}
             </h1>
-            <p class="text-slate-400">Academic background and qualifications</p>
+            <p class="text-slate-600 dark:text-slate-400">{t("page.education.subtitle")}</p>
         </header>
 
         <div class="grid grid-cols-1 gap-6">
@@ -29,30 +29,30 @@ const t = useTranslations(lang);
                     
                     <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 relative z-10">
                         <div class="flex items-start gap-6">
-                            <div class="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-slate-300 group-hover:text-green-400 group-hover:border-green-500/30 group-hover:bg-green-500/10 transition-all duration-500 shrink-0">
+                            <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 group-hover:text-green-600 dark:group-hover:text-green-400 group-hover:border-green-500/30 group-hover:bg-green-500/10 transition-all duration-500 shrink-0">
                                 <GraduationCap size={28} />
                             </div>
                             
                             <div>
-                                <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">
-                                    {edu.school}
+                                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                                    {resolveLocalizedString(edu.school, lang)}
                                 </h2>
-                                <h3 class="text-lg text-slate-300 font-medium mb-4">
-                                    {edu.degree} in {edu.field}
+                                <h3 class="text-lg text-slate-700 dark:text-slate-300 font-medium mb-4">
+                                    {resolveLocalizedString(edu.degree, lang)} {lang === "tr" ? "•" : "in"} {resolveLocalizedString(edu.field, lang)}
                                 </h3>
                                 
                                 {edu.description && (
-                                    <p class="text-slate-400 leading-relaxed max-w-2xl">
-                                        {edu.description}
+                                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
+                                        {resolveLocalizedString(edu.description, lang)}
                                     </p>
                                 )}
                             </div>
                         </div>
                         
                         <div class="flex flex-col gap-3 shrink-0 md:items-end">
-                            <div class="flex items-center gap-2 text-sm text-green-400 bg-green-500/10 px-4 py-2 rounded-lg border border-green-500/20 font-medium">
+                            <div class="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 bg-green-500/10 px-4 py-2 rounded-lg border border-green-500/20 font-medium">
                                 <Calendar size={16} />
-                                {edu.duration}
+                                {resolveLocalizedString(edu.duration, lang)}
                             </div>
                         </div>
                     </div>
